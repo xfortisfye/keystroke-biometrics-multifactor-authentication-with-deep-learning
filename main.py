@@ -26,8 +26,8 @@ def main():
 
     while startFlag is True:
         print("What kind of dataset will you like to generate? \n"
-        + "1) Non-controlled random dataset for CAPTCHA\n"
-        + "2) Non-controlled random and fixed dataset for CAPTCHA\n"
+        + "1) Random 10-Letters Dataset for CAPTCHA\n"
+        + "2) Identical 10-Letters Dataset for CAPTCHA\n"
         + "3) Controlled dataset for Password\n"
         + "4) Controlled dataset for Password")
         x = input()
