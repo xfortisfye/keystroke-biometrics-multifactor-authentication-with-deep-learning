@@ -7,7 +7,7 @@ import time
 from sys import exit
 
 # keyboard
-# from pynput.keyboard import Key, Listener
+from pynput.keyboard import Key, Listener
 from keyboard import Keyboard
 import csv
 from time import sleep
@@ -22,6 +22,7 @@ def main():
     finally:
         print("...Program started.")
 
+    # start from here
     startFlag = True
 
     while startFlag is True:
@@ -30,11 +31,23 @@ def main():
         + "2) Identical 10-Letters Dataset for CAPTCHA\n"
         + "3) Controlled dataset for Password\n"
         + "4) Controlled dataset for Password")
-        x = input()
+        case = input()
         
-        if x <= 4:
+        completed = False
+        name = input("What is your name? ")
+
+        if case is 1:
+            print("hello1")
+            
+        elif case is 2:
             # do stuf
-            print("hello")
+            print("hello2")
+        elif case is 3:
+            # do stuf
+            print("hello3")
+        elif case is 4:
+            # do stuf
+            print("hello4")
         else:
             print("Please select an appropriate case number.")     
 
