@@ -361,7 +361,7 @@ def main():
             '''
             create merge_df csv file
             '''
-            merge_csv_name = name + "_merge_df.csv"
+            merge_csv_name = "df_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
             if os.path.isfile(merge_csv_path) is True:
@@ -718,7 +718,7 @@ def main():
             '''
             create merge_df csv file
             '''
-            merge_csv_name = "rand_" + name + "_merge_df.csv"
+            merge_csv_name = "df_rand" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
             if os.path.isfile(merge_csv_path) is True:
@@ -923,7 +923,7 @@ def main():
             '''
             create merge_df csv file
             '''
-            merge_csv_name = "rand_" + name + "_merge_df.csv"
+            merge_csv_name = "df_IUDU_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
             if os.path.isfile(merge_csv_path) is True:
@@ -939,10 +939,10 @@ def main():
 
                 print(f"Merge_DF CSV file will be created: {merge_csv_path}")
 
-            csv_name_original = "original_rand_" + name + ".csv"
+            csv_name_original = "original_IUDU_" + name + ".csv"
             csv_path_original = os.path.join(export_dir_path, csv_name_original)
 
-            csv_name_single = "single_rand_" + name + ".csv"
+            csv_name_single = "single_IUDU_" + name + ".csv"
             csv_path_single = os.path.join(export_dir_path, csv_name_single)
 
             if os.path.isfile(csv_path_original) is True:
@@ -1136,7 +1136,7 @@ def main():
             '''
             create merge_df csv file
             '''
-            merge_csv_name = "own_" + name + "_merge_df.csv"
+            merge_csv_name = "df_own_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
             csv_name_full = "own_" + name + "_full.csv"
@@ -1523,7 +1523,7 @@ def main():
             create merge_df csv file
             '''
 
-            merge_csv_name = "same_" + name + "_merge_df.csv"
+            merge_csv_name = "df_same_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
             csv_name_full = "same_" + name + "_full.csv"
@@ -1906,7 +1906,7 @@ def main():
             '''
             create merge_df csv file
             '''
-            merge_csv_name = "combi_" + name + "_merge_df.csv"
+            merge_csv_name = "df_combi_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
             csv_name_original = "combi_" + name + "_original.csv"
