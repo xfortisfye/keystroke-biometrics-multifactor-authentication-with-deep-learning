@@ -1487,7 +1487,7 @@ def main():
                         print("Password is incorrect. Please retry. ")
                         incorrectCount = incorrectCount + 1
 
-            error_name = "own_error_" + name + ".txt"
+            error_name = "error_own_" + name + ".txt"
             error_path = os.path.join(export_dir_path, error_name) 
 
             if os.path.isfile(error_path) is True:
@@ -1866,12 +1866,8 @@ def main():
                         keyboard.reset()
                         print("Password is incorrect. Please retry. ")
                         incorrectCount = incorrectCount + 1
-
-            export_dir_name = "export"
-            current_path = os.getcwd()
-            export_dir_path = os.path.join(current_path, export_dir_name)
             
-            error_name = "same_error" + name + ".txt"
+            error_name = "error_same_" + name + ".txt"
             error_path = os.path.join(export_dir_path, error_name) 
 
             if os.path.isfile(error_path) is True:
