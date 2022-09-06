@@ -25,9 +25,9 @@ def main():
         + "5) Exp 4: \n"
         + "6) Exp 4: \n"
         + "7) Exp 4: ")
-        case = input()
+        case = int(input())
         
-        if case is 1:
+        if case == 1:
             completed = False
             name = input("What is your name? ")
             round = 25
@@ -350,7 +350,7 @@ def main():
                         keyboard.reset()
                         print("Password is incorrect. Please retry. ")
 
-        elif case is 2:
+        elif case == 2:
             completed = False
             name = input("What is your name? ")
             round = 2
@@ -708,7 +708,7 @@ def main():
                         keyboard.reset()
                         print("Password is incorrect. Please retry. ")
 
-        elif case is 3:
+        elif case == 3:
             completed = False
             name = input("What is your name? ")
             round = 10
@@ -913,7 +913,7 @@ def main():
                         keyboard.reset()
                         print("Password is incorrect. Please retry. ")
 
-        elif case is 4:
+        elif case == 4:
             completed = False
             name = input("What is your name? ")
             round = 10
@@ -1120,7 +1120,7 @@ def main():
                     else:
                         keyboard.reset()
                         print("Password is incorrect. Please retry. ")
-        elif case is 5:
+        elif case == 5:
             completed = False
             name = input("What is your name? ")
             passwordFlag = False
@@ -1504,7 +1504,7 @@ def main():
 
                 print(f"Error file will be created: {error_path}")
 
-        elif case is 6:
+        elif case == 6:
             completed = False
             name = input("What is your name? ")
             password = "dEcisi0n"
@@ -1884,7 +1884,7 @@ def main():
 
                 print(f"Error file will be created: {error_path}")
 
-        elif case is 7:
+        elif case == 7:
             completed = False
             name = input("What is your name? ")
 
@@ -2306,7 +2306,7 @@ def prelude(name):
     '''
     generate info file
     '''
-    info_name = name + "_info.txt"
+    info_name = "info_" + name + ".txt"
     info_path = os.path.join(export_dir_path, info_name) 
 
     if os.path.isfile(info_path) is True:
@@ -2320,6 +2320,8 @@ def prelude(name):
             file.write(f"Platform release: {platform.release()}\n")
 
         print(f"Info file will be created: {info_path}")
+
+    return export_dir_path
 
 ## split up into prelude of info, two different excel/for loop after that [set1/2/3 - set4].
 
