@@ -349,6 +349,7 @@ def main():
                     else:
                         keyboard.reset()
                         print("Password is incorrect. Please retry. ")
+
         elif case is 2:
             completed = False
             name = input("What is your name? ")
@@ -377,10 +378,10 @@ def main():
 
                 print(f"Merge_DF CSV file will be created: {merge_csv_path}")
 
-            csv_name_original = name + "_original.csv"
+            csv_name_original = "original_" + name + ".csv"
             csv_path_original = os.path.join(export_dir_path, csv_name_original)
 
-            csv_name_single = name + "_single.csv"
+            csv_name_single = "single_" + name + ".csv"
             csv_path_single = os.path.join(export_dir_path, csv_name_single)
 
             if os.path.isfile(csv_path_original) is True:
@@ -706,6 +707,7 @@ def main():
                     else:
                         keyboard.reset()
                         print("Password is incorrect. Please retry. ")
+
         elif case is 3:
             completed = False
             name = input("What is your name? ")
@@ -1139,18 +1141,17 @@ def main():
             merge_csv_name = "df_own_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
-            csv_name_full = "own_" + name + "_full.csv"
+            csv_name_full = "own_full_" + name + ".csv"
             csv_path_full = os.path.join(export_dir_path, csv_name_full)
 
-            csv_name_semi = "own_" + name + "_semi.csv"
+            csv_name_semi = "own_semi_" + name + ".csv"
             csv_path_semi = os.path.join(export_dir_path, csv_name_semi)
 
-            csv_name_bare = "own_" + name + "_bare.csv"
+            csv_name_bare = "own_bare_" + name + ".csv"
             csv_path_bare = os.path.join(export_dir_path, csv_name_bare)
 
-            csv_name_single = "own_" + name + "_single.csv"
+            csv_name_single = "own_single_" + name + ".csv"
             csv_path_single = os.path.join(export_dir_path, csv_name_single)
-
 
             if os.path.isfile(merge_csv_path) is True:
                 print(f"CSV file exist at {merge_csv_path}")
@@ -1486,12 +1487,7 @@ def main():
                         print("Password is incorrect. Please retry. ")
                         incorrectCount = incorrectCount + 1
 
-            export_dir_name = "export"
-            current_path = os.getcwd()
-            export_dir_path = os.path.join(current_path, export_dir_name)
-            
-            error_name = "own_" + name + "_error.txt"
-            # error_name = "same_" + name + "_error.txt"
+            error_name = "own_error_" + name + ".txt"
             error_path = os.path.join(export_dir_path, error_name) 
 
             if os.path.isfile(error_path) is True:
@@ -1522,20 +1518,19 @@ def main():
             '''
             create merge_df csv file
             '''
-
             merge_csv_name = "df_same_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
-            csv_name_full = "same_" + name + "_full.csv"
+            csv_name_full = "same_full" + name + ".csv"
             csv_path_full = os.path.join(export_dir_path, csv_name_full)
 
-            csv_name_semi = "same_" + name + "_semi.csv"
+            csv_name_semi = "same_semi" + name + ".csv"
             csv_path_semi = os.path.join(export_dir_path, csv_name_semi)
 
-            csv_name_bare = "same_" + name + "_bare.csv"
+            csv_name_bare = "same_bare" + name + ".csv"
             csv_path_bare = os.path.join(export_dir_path, csv_name_bare)
 
-            csv_name_single = "same_" + name + "_single.csv"
+            csv_name_single = "same_single" + name + ".csv"
             csv_path_single = os.path.join(export_dir_path, csv_name_single)
 
             if os.path.isfile(merge_csv_path) is True:
@@ -1876,8 +1871,7 @@ def main():
             current_path = os.getcwd()
             export_dir_path = os.path.join(current_path, export_dir_name)
             
-            error_name = "own_" + name + "_error.txt"
-            # error_name = "same_" + name + "_error.txt"
+            error_name = "same_error" + name + ".txt"
             error_path = os.path.join(export_dir_path, error_name) 
 
             if os.path.isfile(error_path) is True:
@@ -1909,17 +1903,17 @@ def main():
             merge_csv_name = "df_combi_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
-            csv_name_original = "combi_" + name + "_original.csv"
+            csv_name_original = "combi_original_" + name + ".csv"
             csv_path_original = os.path.join(export_dir_path, csv_name_original)
 
-            csv_name_semi = "combi_" + name + "_semi.csv"
+            csv_name_semi = "combi_semi_" + name + ".csv"
             csv_path_semi = os.path.join(export_dir_path, csv_name_semi)
 
-            csv_name_bare = "combi_" + name + "_bare.csv"
+            csv_name_bare = "combi_bare_" + name + ".csv"
             csv_path_bare = os.path.join(export_dir_path, csv_name_bare)
 
-            csv_name_5 = "combi_" + name + "_5.csv"
-            csv_path_single = os.path.join(export_dir_path, csv_name_5)
+            csv_name_single = "combi_single_" + name + ".csv"
+            csv_path_single = os.path.join(export_dir_path, csv_name_single)
 
             if os.path.isfile(merge_csv_path) is True:
                 print(f"CSV file exist at {merge_csv_path}")
@@ -2259,12 +2253,7 @@ def main():
                             print("Password is incorrect. Please retry. ")
                             incorrectCount = incorrectCount + 1
 
-            export_dir_name = "export"
-            current_path = os.getcwd()
-            export_dir_path = os.path.join(current_path, export_dir_name)
-            
-            error_name = "combi_" + name + "_error.txt"
-            # error_name = "same_" + name + "_error.txt"
+            error_name = "error_combi_" + name + ".txt"
             error_path = os.path.join(export_dir_path, error_name) 
 
             if os.path.isfile(error_path) is True:
@@ -2276,7 +2265,7 @@ def main():
                     file.write(f"Invalid Count: {incorrectCount}\n")
                     totalCount = invalidCount + incorrectCount
                     file.write(f"Total Wrong Count: {totalCount}\n")
-                    accuracy = (105 / (totalCount + 105)) * 100
+                    accuracy = (60 / (totalCount + 60)) * 100
                     file.write(f"Accuracy: {accuracy}\n")
 
                 print(f"Error file will be created: {error_path}")
