@@ -720,7 +720,7 @@ def main():
             '''
             create merge_df csv file
             '''
-            merge_csv_name = "df_rand" + name + ".csv"
+            merge_csv_name = "df_rand_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
             if os.path.isfile(merge_csv_path) is True:
