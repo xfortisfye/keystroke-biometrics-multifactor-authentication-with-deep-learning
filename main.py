@@ -1141,16 +1141,16 @@ def main():
             merge_csv_name = "df_own_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
-            csv_name_full = "own_full_" + name + ".csv"
+            csv_name_full = "full_own_" + name + ".csv"
             csv_path_full = os.path.join(export_dir_path, csv_name_full)
 
-            csv_name_semi = "own_semi_" + name + ".csv"
-            csv_path_semi = os.path.join(export_dir_path, csv_name_semi)
+            csv_name_nostat = "nostat_own_" + name + ".csv"
+            csv_path_nostat = os.path.join(export_dir_path, csv_name_nostat)
 
-            csv_name_bare = "own_bare_" + name + ".csv"
+            csv_name_bare = "bare_own_" + name + ".csv"
             csv_path_bare = os.path.join(export_dir_path, csv_name_bare)
 
-            csv_name_single = "own_single_" + name + ".csv"
+            csv_name_single = "single_own_" + name + ".csv"
             csv_path_single = os.path.join(export_dir_path, csv_name_single)
 
             if os.path.isfile(merge_csv_path) is True:
@@ -1341,12 +1341,12 @@ def main():
                     dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
                     dw.writeheader()
 
-                print(f"CSV file will be created: {csv_path_full}")
+                print(f"Full CSV file will be created: {csv_path_full}")
 
                 ###########################################
 
-            if os.path.isfile(csv_path_semi) is True:
-                print(f"CSV file exist at {csv_path_semi}")
+            if os.path.isfile(csv_path_nostat) is True:
+                print(f"CSV file exist at {csv_path_nostat}")
             else:
                 # assign header columns
                 headerList = ['Subject', 'Password']
@@ -1395,11 +1395,11 @@ def main():
                     headerList.append(f"T8-NG|{_}+{_+7}")
                 
                 # open CSV file and assign header
-                with open(csv_path_semi, 'w', newline='') as file:
+                with open(csv_path_nostat, 'w', newline='') as file:
                     dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
                     dw.writeheader()
 
-                print(f"CSV file will be created: {csv_path_semi}")
+                print(f"Nostat CSV file will be created: {csv_path_nostat}")
 
                 ###########################################
 
@@ -1436,13 +1436,13 @@ def main():
                         dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
                         dw.writeheader()
 
-                    print(f"CSV file will be created: {csv_path_single}")
+                    print(f"Single CSV file will be created: {csv_path_single}")
 
             keyboard = Keyboard()
             keyboard.set_name(name)
             keyboard.set_merge_csv(merge_csv_path)
             keyboard.set_csv(csv_path_full)
-            keyboard.set_csv_semi(csv_path_semi)
+            keyboard.set_csv_nostat(csv_path_nostat)
             keyboard.set_csv_bare(csv_path_bare)
             keyboard.set_csv_single(csv_path_single)
             keyboard.set_export(export_dir_path)
@@ -1521,16 +1521,16 @@ def main():
             merge_csv_name = "df_same_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
-            csv_name_full = "same_full" + name + ".csv"
+            csv_name_full = "full_same_" + name + ".csv"
             csv_path_full = os.path.join(export_dir_path, csv_name_full)
 
-            csv_name_semi = "same_semi" + name + ".csv"
-            csv_path_semi = os.path.join(export_dir_path, csv_name_semi)
+            csv_name_nostat = "nostat_same_" + name + ".csv"
+            csv_path_nostat = os.path.join(export_dir_path, csv_name_nostat)
 
-            csv_name_bare = "same_bare" + name + ".csv"
+            csv_name_bare = "bare_same_" + name + ".csv"
             csv_path_bare = os.path.join(export_dir_path, csv_name_bare)
 
-            csv_name_single = "same_single" + name + ".csv"
+            csv_name_single = "single_same_" + name + ".csv"
             csv_path_single = os.path.join(export_dir_path, csv_name_single)
 
             if os.path.isfile(merge_csv_path) is True:
@@ -1721,12 +1721,12 @@ def main():
                     dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
                     dw.writeheader()
 
-                print(f"CSV file will be created: {csv_path_full}")
+                print(f"Full CSV file will be created: {csv_path_full}")
 
                 ###########################################
 
-            if os.path.isfile(csv_path_semi) is True:
-                print(f"CSV file exist at {csv_path_semi}")
+            if os.path.isfile(csv_path_nostat) is True:
+                print(f"CSV file exist at {csv_path_nostat}")
             else:
                 # assign header columns
                 headerList = ['Subject', 'Password']
@@ -1775,11 +1775,11 @@ def main():
                     headerList.append(f"T8-NG|{_}+{_+7}")
                 
                 # open CSV file and assign header
-                with open(csv_path_semi, 'w', newline='') as file:
+                with open(csv_path_nostat, 'w', newline='') as file:
                     dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
                     dw.writeheader()
 
-                print(f"CSV file will be created: {csv_path_semi}")
+                print(f"Nostat CSV file will be created: {csv_path_nostat}")
 
                 ###########################################
 
@@ -1816,13 +1816,13 @@ def main():
                         dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
                         dw.writeheader()
 
-                    print(f"CSV file will be created: {csv_path_single}")
+                    print(f"Single CSV file will be created: {csv_path_single}")
 
             keyboard = Keyboard()
             keyboard.set_name(name)
             keyboard.set_merge_csv(merge_csv_path)
             keyboard.set_csv(csv_path_full)
-            keyboard.set_csv_semi(csv_path_semi)
+            keyboard.set_csv_nostat(csv_path_nostat)
             keyboard.set_csv_bare(csv_path_bare)
             keyboard.set_csv_single(csv_path_single)
             keyboard.set_export(export_dir_path)
@@ -1899,16 +1899,16 @@ def main():
             merge_csv_name = "df_combi_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
-            csv_name_original = "combi_original_" + name + ".csv"
+            csv_name_original = "original_combi_" + name + ".csv"
             csv_path_original = os.path.join(export_dir_path, csv_name_original)
 
-            csv_name_semi = "combi_semi_" + name + ".csv"
-            csv_path_semi = os.path.join(export_dir_path, csv_name_semi)
+            csv_name_nostat = "nostat_combi_" + name + ".csv"
+            csv_path_nostat = os.path.join(export_dir_path, csv_name_nostat)
 
-            csv_name_bare = "combi_bare_" + name + ".csv"
+            csv_name_bare = "bare_combi_" + name + ".csv"
             csv_path_bare = os.path.join(export_dir_path, csv_name_bare)
 
-            csv_name_single = "combi_single_" + name + ".csv"
+            csv_name_single = "single_combi_" + name + ".csv"
             csv_path_single = os.path.join(export_dir_path, csv_name_single)
 
             if os.path.isfile(merge_csv_path) is True:
@@ -2099,12 +2099,12 @@ def main():
                     dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
                     dw.writeheader()
 
-                print(f"CSV file will be created: {csv_path_original}")
+                print(f"Full CSV file will be created: {csv_path_original}")
 
                 ###########################################
 
-            if os.path.isfile(csv_path_semi) is True:
-                print(f"CSV file exist at {csv_path_semi}")
+            if os.path.isfile(csv_path_nostat) is True:
+                print(f"CSV file exist at {csv_path_nostat}")
             else:
                 # assign header columns
                 headerList = ['Subject', 'Password']
@@ -2153,11 +2153,11 @@ def main():
                     headerList.append(f"T8-NG|{_}+{_+7}")
                 
                 # open CSV file and assign header
-                with open(csv_path_semi, 'w', newline='') as file:
+                with open(csv_path_nostat, 'w', newline='') as file:
                     dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
                     dw.writeheader()
 
-                print(f"CSV file will be created: {csv_path_semi}")
+                print(f"Nostat CSV file will be created: {csv_path_nostat}")
 
                 ###########################################
 
@@ -2194,13 +2194,13 @@ def main():
                         dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
                         dw.writeheader()
 
-                    print(f"CSV file will be created: {csv_path_single}")
+                    print(f"Single CSV file will be created: {csv_path_single}")
 
             keyboard = Keyboard()
             keyboard.set_name(name)
             keyboard.set_merge_csv(merge_csv_path)
             keyboard.set_csv(csv_path_original)
-            keyboard.set_csv_semi(csv_path_semi)
+            keyboard.set_csv_nostat(csv_path_nostat)
             keyboard.set_csv_bare(csv_path_bare)
             keyboard.set_csv_single(csv_path_single)
             keyboard.set_export(export_dir_path)

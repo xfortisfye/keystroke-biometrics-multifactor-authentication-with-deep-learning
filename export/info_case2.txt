@@ -1,4 +1,0 @@
-Name: case2
-OS: nt
-Platform system: Windows
-Platform release: 10
