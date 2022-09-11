@@ -1,0 +1,4 @@
+Name: ys
+OS: nt
+Platform system: Windows
+Platform release: 10

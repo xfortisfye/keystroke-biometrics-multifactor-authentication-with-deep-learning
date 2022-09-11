@@ -1,4 +1,0 @@
-Name: qk
-OS: posix
-Platform system: Darwin
-Platform release: 21.5.0
