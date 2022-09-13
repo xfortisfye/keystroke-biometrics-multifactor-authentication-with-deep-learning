@@ -339,7 +339,7 @@ def main():
                         
                         if len(press_df.index.values) == len(_) and len(release_df.index.values) == len(_):
                             print(f"Thank you. {maxCount - count} times left. ")
-                            keyboard.export_to_csv(_)
+                            keyboard.export_to_csv_1(_)
                             count = count + 1
                             keyboard.reset()
                             completed = True
@@ -697,7 +697,7 @@ def main():
                         
                         if len(press_df.index.values) == len(_) and len(release_df.index.values) == len(_):
                             print(f"Thank you. {maxCount - count} times left. ")
-                            keyboard.export_to_csv(_)
+                            keyboard.export_to_csv_2(_)
                             count = count + 1
                             keyboard.reset()
                             completed = True
@@ -902,7 +902,7 @@ def main():
                         
                         if len(press_df.index.values) == len(_) and len(release_df.index.values) == len(_):
                             print(f"Thank you. {maxCount - count} times left. ")
-                            keyboard.export_to_csv(_)
+                            keyboard.export_to_csv_3(_)
                             count = count + 1
                             keyboard.reset()
                             completed = True
@@ -912,7 +912,7 @@ def main():
                     else:
                         keyboard.reset()
                         print("Password is incorrect. Please retry. ")
-
+                        
         elif case == 4:
             completed = False
             name = input("What is your name? ")
@@ -1110,7 +1110,7 @@ def main():
                         
                         if len(press_df.index.values) == len(_) and len(release_df.index.values) == len(_):
                             print(f"Thank you. {maxCount - count} times left. ")
-                            keyboard.export_to_csv(_)
+                            keyboard.export_to_csv_3(_)
                             count = count + 1
                             keyboard.reset()
                             completed = True
@@ -1120,6 +1120,7 @@ def main():
                     else:
                         keyboard.reset()
                         print("Password is incorrect. Please retry. ")
+
         elif case == 5:
             completed = False
             name = input("What is your name? ")
@@ -1474,7 +1475,7 @@ def main():
                         
                         if len(press_df.index.values) == len(password) and len(release_df.index.values) == len(password):
                             print(f"Thank you. {maxCount - count} times left. ")
-                            keyboard.export_to_csv(password)
+                            keyboard.export_to_csv_4(password)
                             count = count + 1
                             keyboard.reset()
                             completed = True
@@ -1854,7 +1855,7 @@ def main():
                         
                         if len(press_df.index.values) == len(password) and len(release_df.index.values) == len(password):
                             print(f"Thank you. {maxCount - count} times left. ")
-                            keyboard.export_to_csv(password)
+                            keyboard.export_to_csv_4(password)
                             count = count + 1
                             keyboard.reset()
                             completed = True
@@ -2236,7 +2237,7 @@ def main():
                             
                             if len(press_df.index.values) == len(password) and len(release_df.index.values) == len(password):
                                 print(f"Thank you. {maxCount - count} times left. ")
-                                keyboard.export_to_csv(password)
+                                keyboard.export_to_csv_4(password)
                                 count = count + 1
                                 keyboard.reset()
                                 completed = True

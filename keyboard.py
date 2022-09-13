@@ -39,8 +39,8 @@ class Keyboard():
 
     def set_csv_single(self, csv_single): self.csv_single = csv_single
     def get_csv_single(self): return self.csv_single
-    def set_csv_semi(self, csv_semi): self.csv_semi = csv_semi
-    def get_csv_semi(self): return self.csv_semi
+    def set_csv_nostat(self, csv_nostat): self.csv_nostat = csv_nostat
+    def get_csv_nostat(self): return self.csv_nostat
     def set_csv_bare(self, csv_bare): self.csv_bare = csv_bare
     def get_csv_bare(self): return self.csv_bare
 
@@ -81,6 +81,23 @@ class Keyboard():
                 self.pressed_flag = False
                 self.hold_flag = False
                 self.add_to_dataset("release", str(key), release_time, "individual")
+
+    def add_to_dataset(self, type, key, time, log):
+        if type == "press":
+            if log == "individual" or log == "hold detected":
+                self.press_df = pd.concat([self.press_df, pd.DataFrame.from_records([{'key': str(key).lower(), 'press_time': time}])])
+            #     print(f"Key: {str(key)} | {type}_time: {str(time)} | Log: {log}")
+            # else:
+            #     print(f"Key: {str(key)} | {type}_time: {str(time)} | Log: {log}")
+
+        elif type == "release":
+            if log == "individual":
+                self.release_df = pd.concat([self.release_df, pd.DataFrame.from_records([{'key': str(key).lower(), 'release_time': time}])])
+        #         print(f"Key: {str(key)} | {type}_time: {str(time)} | Log: {log}")
+        #     else:
+        #         print(f"Key: {str(key)} | {type}_time: {str(time)} | Log: {log}")
+        # else:
+        #     print("Invalid type of timing being added to dataset.")
 
     def convert_key_to_int(self, keys):
         if keys == "\'a\'":
@@ -947,7 +964,7 @@ class Keyboard():
             seven_rf_list.clear()
             seven_ng_list.clear()
 
-        with open(self.get_csv_semi(), 'a', newline='') as file:
+        with open(self.get_csv_nostat(), 'a', newline='') as file:
             placeholder = [merge_df.iloc[0]["release_time"] - merge_df.iloc[0]["press_time"]]
             
             for row in range(0, maxPwdLen-1):
