@@ -1,0 +1,4 @@
+set01-02 need to run
+set02-01, set02-02 need to run
+set02-10 not setup as apparently got jupyter notebook in the folder alrdy.
+may not be impt to do.
