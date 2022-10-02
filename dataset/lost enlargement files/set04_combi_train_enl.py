@@ -10,23 +10,12 @@ from sys import exit
 FEATURES_COL = 2
 export_dir_path = os.path.join(os.getcwd(), "export")
 
-# csv_name = "flm2m_rand194-train" + ".csv"
-# csv_path = os.path.join(export_dir_path, csv_name)
-# small_df = pd.read_csv("dataset/" + "rand97_train.csv")
-
-# csv_name = "flm2m_fr194-train" + ".csv"
-# csv_path = os.path.join(export_dir_path, csv_name)
-# small_df = pd.read_csv("dataset/" + "fr97_train.csv")
-
-# csv_name = "flm2m_rand291_train" + ".csv"
-# csv_path = os.path.join(export_dir_path, csv_name)
-# small_df = pd.read_csv("dataset/" + "fr97_train.csv")
-
 csv_name = "flm2m_fr291_train" + ".csv"
 csv_path = os.path.join(export_dir_path, csv_name)
 small_df = pd.read_csv("dataset/" + "fr97_train.csv")
 
-headerList = ['Subject', 'Password']
+headerList = ['Subject', 'Actual', 'Password']
+
 for _ in range(2):
     headerList.append(f"T2-D|0")
     for _ in range(8-1):

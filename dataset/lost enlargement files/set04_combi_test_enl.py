@@ -7,38 +7,18 @@ import pandas as pd
 import os
 from sys import exit
 
-
 FEATURES_COL = 2
 export_dir_path = os.path.join(os.getcwd(), "export")
 
-# csv_name = "flm2m_rand194-test" + ".csv"
-# csv_path = os.path.join(export_dir_path, csv_name)
-# small_df = pd.read_csv("dataset/" + "rand97_test.csv")
+csv_name = "flm2m_fr291_train" + ".csv"
+csv_path = os.path.join(export_dir_path, csv_name)
+small_df = pd.read_csv("dataset/" + "fr97_train.csv")
 
-# csv_name = "flm2m_fr194-test_fixed" + ".csv"
-# csv_path = os.path.join(export_dir_path, csv_name)
-# small_df = pd.read_csv("dataset/" + "fr97_test_fixed.csv")
+headerList = ['Subject', 'Actual', 'Password']
 
-# csv_name = "flm2m_fr194-test_flex" + ".csv"
-# csv_path = os.path.join(export_dir_path, csv_name)
-# small_df = pd.read_csv("dataset/" + "fr97_test_flex.csv")
-
-# csv_name = "flm2m_rand291_test" + ".csv"
-# csv_path = os.path.join(export_dir_path, csv_name)
-# small_df = pd.read_csv("dataset/" + "rand97_test.csv")
-
-# csv_name = "flm2m_fr291_test_fixed" + ".csv"
-# csv_path = os.path.join(export_dir_path, csv_name)
-# small_df = pd.read_csv("dataset/" + "fr97_test_fixed.csv")
-
-# csv_name = "flm2m_fr291_test_flex" + ".csv"
-# csv_path = os.path.join(export_dir_path, csv_name)
-# small_df = pd.read_csv("dataset/" + "fr97_test_flex.csv")
-
-headerList = ['Subject', 'Password']
 for _ in range(2):
     headerList.append(f"T2-D|0")
-    for _ in range(5-1):
+    for _ in range(8-1):
         headerList.append(f"T2-I|{_}+{_+1}")
         headerList.append(f"T2-PF|{_}+{_+1}")
         headerList.append(f"T2-RF|{_}+{_+1}")
@@ -68,7 +48,7 @@ for _ in range(2):
     headerList.append(f"T2-RF|SD")
     headerList.append(f"T2-NG|SD")
 
-    for _ in range(10-2):
+    for _ in range(8-2):
         headerList.append(f"T3-I|{_}+{_+2}")
         headerList.append(f"T3-PF|{_}+{_+2}")
         headerList.append(f"T3-RF|{_}+{_+2}")
@@ -94,7 +74,7 @@ for _ in range(2):
     headerList.append(f"T3-RF|SD")
     headerList.append(f"T3-NG|SD")
 
-    for _ in range(10-3):
+    for _ in range(8-3):
         headerList.append(f"T4-I|{_}+{_+3}")
         headerList.append(f"T4-PF|{_}+{_+3}")
         headerList.append(f"T4-RF|{_}+{_+3}")
@@ -120,7 +100,7 @@ for _ in range(2):
     headerList.append(f"T4-RF|SD")
     headerList.append(f"T4-NG|SD")
 
-    for _ in range(10-4):
+    for _ in range(8-4):
         headerList.append(f"T5-I|{_}+{_+4}")
         headerList.append(f"T5-PF|{_}+{_+4}")
         headerList.append(f"T5-RF|{_}+{_+4}")
@@ -145,7 +125,7 @@ for _ in range(2):
     headerList.append(f"T5-RF|SD")
     headerList.append(f"T5-NG|SD")
 
-    for _ in range(10-5):
+    for _ in range(8-5):
         headerList.append(f"T6-I|{_}+{_+5}")
         headerList.append(f"T6-PF|{_}+{_+5}")
         headerList.append(f"T6-RF|{_}+{_+5}")
@@ -170,7 +150,7 @@ for _ in range(2):
     headerList.append(f"T6-RF|SD")
     headerList.append(f"T6-NG|SD")
 
-    for _ in range(10-6):
+    for _ in range(8-6):
         headerList.append(f"T7-I|{_}+{_+6}")
         headerList.append(f"T7-PF|{_}+{_+6}")
         headerList.append(f"T7-RF|{_}+{_+6}")
@@ -196,7 +176,7 @@ for _ in range(2):
     headerList.append(f"T7-RF|SD")
     headerList.append(f"T7-NG|SD")
 
-    for _ in range(10-7):
+    for _ in range(8-7):
         headerList.append(f"T8-I|{_}+{_+7}")
         headerList.append(f"T8-PF|{_}+{_+7}")
         headerList.append(f"T8-RF|{_}+{_+7}")
