@@ -5,9 +5,9 @@ import csv
 import pandas as pd
 import os
 
-import_csv = pd.read_csv("01_original/" + "train.csv")
+import_csv = pd.read_csv("03_pair/" + "base_train.csv")
 export_csv_name = "pair_train" + ".csv"
-export_csv_path = os.path.join(os.getcwd(), "02_pair", export_csv_name)
+export_csv_path = os.path.join(os.getcwd(), "03_pair", export_csv_name)
 
 headerList = ['Subject', 'Class', 'Sequence']
 for _ in range(2):

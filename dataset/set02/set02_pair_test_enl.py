@@ -230,13 +230,13 @@ for _ in range(2):
         headerList.append(f"T10-NG|{_}+{_+9}")
 
 
-with open(csv_path, 'w', newline='') as file:
+with open(export_csv_path, 'w', newline='') as file:
         dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
         dw.writeheader()
 
-print(f"CSV file will be created: {csv_path}")
+print(f"CSV file will be created: {export_csv_path}")
 
-with open(csv_path, 'a', newline='') as file:
+with open(export_csv_path, 'a', newline='') as file:
     writer = csv.writer(file)
         
     for body in range(0, 80, 8):

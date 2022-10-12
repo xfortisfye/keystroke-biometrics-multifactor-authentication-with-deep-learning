@@ -5,9 +5,9 @@ import csv
 import pandas as pd
 import os
 
-import_csv = pd.read_csv("01_original/" + "train.csv")
-export_csv_name = "pair_train" + ".csv"
-export_csv_path = os.path.join(os.getcwd(), "02_pair", export_csv_name)
+import_csv = pd.read_csv("03_pair/" + "base_test.csv")
+export_csv_name = "pair_test" + ".csv"
+export_csv_path = os.path.join(os.getcwd(), "03_pair", export_csv_name)
 
 headerList = ['Subject', 'Class', 'Sequence']
 for _ in range(2):
@@ -229,6 +229,7 @@ for _ in range(2):
         headerList.append(f"T10-RF|{_}+{_+9}")
         headerList.append(f"T10-NG|{_}+{_+9}")
 
+
 with open(export_csv_path, 'w', newline='') as file:
         dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
         dw.writeheader()
@@ -238,9 +239,9 @@ print(f"CSV file will be created: {export_csv_path}")
 with open(export_csv_path, 'a', newline='') as file:
     writer = csv.writer(file)
         
-    for body in range(0, 920, 92):
-        for first in range(0, 23):
-            for second in range(23, 92):
+    for body in range(0, 80, 8):
+        for first in range(0, 2):
+            for second in range(2, 8):
                 first_row = body + first
                 placeholder = import_csv.iloc[first_row].values.tolist()
                 
@@ -250,9 +251,9 @@ with open(export_csv_path, 'a', newline='') as file:
                 writer.writerow([*placeholder])
                 placeholder.clear()
 
-        for first in range(23, 46):
+        for first in range(2, 4):
             # four
-            for second in range(0, 23):
+            for second in range(0, 2):
                 first_row = body + first
                 placeholder = import_csv.iloc[first_row].values.tolist()
                 
@@ -262,7 +263,7 @@ with open(export_csv_path, 'a', newline='') as file:
                 writer.writerow([*placeholder])
                 placeholder.clear()
 
-            for second in range(46, 92):
+            for second in range(4, 8):
                 first_row = body + first
                 placeholder = import_csv.iloc[first_row].values.tolist()
                 
@@ -272,9 +273,9 @@ with open(export_csv_path, 'a', newline='') as file:
                 writer.writerow([*placeholder])
                 placeholder.clear()
 
-        for first in range(46, 69):
+        for first in range(4, 6):
             # five
-            for second in range(0, 46):
+            for second in range(0, 4):
                 first_row = body + first
                 placeholder = import_csv.iloc[first_row].values.tolist()
                 
@@ -284,7 +285,7 @@ with open(export_csv_path, 'a', newline='') as file:
                 writer.writerow([*placeholder])
                 placeholder.clear()
 
-            for second in range(69, 92):
+            for second in range(6, 8):
                 first_row = body + first
                 placeholder = import_csv.iloc[first_row].values.tolist()
                 
@@ -294,9 +295,9 @@ with open(export_csv_path, 'a', newline='') as file:
                 writer.writerow([*placeholder])
                 placeholder.clear()
 
-        for first in range(69, 92):
+        for first in range(6, 8):
             # six
-            for second in range(0, 69):
+            for second in range(0, 6):
                 first_row = body + first
                 placeholder = import_csv.iloc[first_row].values.tolist()
                 
