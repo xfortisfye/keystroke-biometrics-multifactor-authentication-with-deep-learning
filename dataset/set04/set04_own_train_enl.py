@@ -7,14 +7,14 @@ import os
 
 FEATURES_COL = 2
 
-import_csv = pd.read_csv("01_own/" + "own_test.csv")
-export_csv_name = "pair_test_own" + ".csv"
+import_csv = pd.read_csv("05_pair_own/" + "own_train.csv")
+export_csv_name = "pair_train_own" + ".csv"
 export_csv_path = os.path.join(os.getcwd(), "05_pair_own", export_csv_name)
 
 headerList = ['Subject', 'Password']
 for _ in range(2):
     headerList.append(f"T2-D|0")
-    for _ in range(5-1):
+    for _ in range(8-1):
         headerList.append(f"T2-I|{_}+{_+1}")
         headerList.append(f"T2-PF|{_}+{_+1}")
         headerList.append(f"T2-RF|{_}+{_+1}")
@@ -44,7 +44,7 @@ for _ in range(2):
     headerList.append(f"T2-RF|SD")
     headerList.append(f"T2-NG|SD")
 
-    for _ in range(10-2):
+    for _ in range(8-2):
         headerList.append(f"T3-I|{_}+{_+2}")
         headerList.append(f"T3-PF|{_}+{_+2}")
         headerList.append(f"T3-RF|{_}+{_+2}")
@@ -70,7 +70,7 @@ for _ in range(2):
     headerList.append(f"T3-RF|SD")
     headerList.append(f"T3-NG|SD")
 
-    for _ in range(10-3):
+    for _ in range(8-3):
         headerList.append(f"T4-I|{_}+{_+3}")
         headerList.append(f"T4-PF|{_}+{_+3}")
         headerList.append(f"T4-RF|{_}+{_+3}")
@@ -96,7 +96,7 @@ for _ in range(2):
     headerList.append(f"T4-RF|SD")
     headerList.append(f"T4-NG|SD")
 
-    for _ in range(10-4):
+    for _ in range(8-4):
         headerList.append(f"T5-I|{_}+{_+4}")
         headerList.append(f"T5-PF|{_}+{_+4}")
         headerList.append(f"T5-RF|{_}+{_+4}")
@@ -121,7 +121,7 @@ for _ in range(2):
     headerList.append(f"T5-RF|SD")
     headerList.append(f"T5-NG|SD")
 
-    for _ in range(10-5):
+    for _ in range(8-5):
         headerList.append(f"T6-I|{_}+{_+5}")
         headerList.append(f"T6-PF|{_}+{_+5}")
         headerList.append(f"T6-RF|{_}+{_+5}")
@@ -146,7 +146,7 @@ for _ in range(2):
     headerList.append(f"T6-RF|SD")
     headerList.append(f"T6-NG|SD")
 
-    for _ in range(10-6):
+    for _ in range(8-6):
         headerList.append(f"T7-I|{_}+{_+6}")
         headerList.append(f"T7-PF|{_}+{_+6}")
         headerList.append(f"T7-RF|{_}+{_+6}")
@@ -172,24 +172,24 @@ for _ in range(2):
     headerList.append(f"T7-RF|SD")
     headerList.append(f"T7-NG|SD")
 
-    for _ in range(10-7):
+    for _ in range(8-7):
         headerList.append(f"T8-I|{_}+{_+7}")
         headerList.append(f"T8-PF|{_}+{_+7}")
         headerList.append(f"T8-RF|{_}+{_+7}")
         headerList.append(f"T8-NG|{_}+{_+7}")
 
 with open(export_csv_path, 'w', newline='') as file:
-    dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
-    dw.writeheader()
+        dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
+        dw.writeheader()
 
-    print(f"\nCSV file will be created: {export_csv_path}")
+print(f"\nCSV file will be created: {export_csv_path}")
 
 with open(export_csv_path, 'a', newline='') as file:
     writer = csv.writer(file)
-
-    for body in range(0, 60, 5):
-        for first in range(0, 5):
-            for second in range(0, 5):
+    
+    for body in range(0, 1200, 100):
+        for first in range(0, 100):
+            for second in range(0, 100):
                 if second == first:
                     pass
                 else:    

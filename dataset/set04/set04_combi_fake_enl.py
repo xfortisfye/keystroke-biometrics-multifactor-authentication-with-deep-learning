@@ -5,13 +5,13 @@ import csv
 import pandas as pd
 import os
 
-FEATURES_COL = 2
+FEATURES_COL = 3
 
-import_csv = pd.read_csv("01_own/" + "own_train.csv")
-export_csv_name = "pair_train_own" + ".csv"
-export_csv_path = os.path.join(os.getcwd(), "05_pair_own", export_csv_name)
+import_csv = pd.read_csv("25_pair_combi/" + "combi_fake.csv")
+export_csv_name = "pair_combi_fake" + ".csv"
+export_csv_path = os.path.join(os.getcwd(), "25_pair_combi", export_csv_name)
 
-headerList = ['Subject', 'Password']
+headerList = ['Subject', 'Actual', 'Password']
 for _ in range(2):
     headerList.append(f"T2-D|0")
     for _ in range(8-1):
@@ -179,17 +179,17 @@ for _ in range(2):
         headerList.append(f"T8-NG|{_}+{_+7}")
 
 with open(export_csv_path, 'w', newline='') as file:
-        dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
-        dw.writeheader()
+    dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
+    dw.writeheader()
 
-print(f"\nCSV file will be created: {export_csv_path}")
+    print(f"\nCSV file will be created: {export_csv_path}")
 
 with open(export_csv_path, 'a', newline='') as file:
     writer = csv.writer(file)
-    
-    for body in range(0, 1200, 100):
-        for first in range(0, 100):
-            for second in range(0, 100):
+
+    for body in range(0, 660, 5):
+        for first in range(0, 5):
+            for second in range(0, 5):
                 if second == first:
                     pass
                 else:    
