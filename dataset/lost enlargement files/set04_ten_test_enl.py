@@ -35,8 +35,8 @@ export_dir_path = os.path.join(os.getcwd(), "export")
 # csv_path = os.path.join(export_dir_path, csv_name)
 # small_df = pd.read_csv("dataset/" + "fr97_test_flex.csv")
 
-headerList = ['Subject', 'Sequence']
-for _ in range(3):
+headerList = ['Subject', 'Password']
+for _ in range(2):
     headerList.append(f"T2-D|0")
     for _ in range(5-1):
         headerList.append(f"T2-I|{_}+{_+1}")
@@ -48,27 +48,27 @@ for _ in range(3):
     headerList.append(f"T2-I|S")
     headerList.append(f"T2-PF|S")
     headerList.append(f"T2-RF|S")
-    headerList.append(f"T2-DT-S")
+    headerList.append(f"T2-NG|S")
 
     headerList.append(f"T2-D|M")
     headerList.append(f"T2-I|M")
     headerList.append(f"T2-PF|M")
     headerList.append(f"T2-RF|M")
-    headerList.append(f"T2-DT-M")
+    headerList.append(f"T2-NG|M")
 
     headerList.append(f"T2-D|VAR")
     headerList.append(f"T2-I|VAR")
     headerList.append(f"T2-PF|VAR")
     headerList.append(f"T2-RF|VAR")
-    headerList.append(f"T2-DT-VAR")
+    headerList.append(f"T2-NG|VAR")
 
     headerList.append(f"T2-D|SD")
     headerList.append(f"T2-I|SD")
     headerList.append(f"T2-PF|SD")
     headerList.append(f"T2-RF|SD")
-    headerList.append(f"T2-DT-SD")
+    headerList.append(f"T2-NG|SD")
 
-    for _ in range(5-2):
+    for _ in range(10-2):
         headerList.append(f"T3-I|{_}+{_+2}")
         headerList.append(f"T3-PF|{_}+{_+2}")
         headerList.append(f"T3-RF|{_}+{_+2}")
@@ -94,7 +94,7 @@ for _ in range(3):
     headerList.append(f"T3-RF|SD")
     headerList.append(f"T3-NG|SD")
 
-    for _ in range(5-3):
+    for _ in range(10-3):
         headerList.append(f"T4-I|{_}+{_+3}")
         headerList.append(f"T4-PF|{_}+{_+3}")
         headerList.append(f"T4-RF|{_}+{_+3}")
@@ -120,11 +120,87 @@ for _ in range(3):
     headerList.append(f"T4-RF|SD")
     headerList.append(f"T4-NG|SD")
 
-    for _ in range(5-4):
+    for _ in range(10-4):
         headerList.append(f"T5-I|{_}+{_+4}")
         headerList.append(f"T5-PF|{_}+{_+4}")
         headerList.append(f"T5-RF|{_}+{_+4}")
         headerList.append(f"T5-NG|{_}+{_+4}")
+    headerList.append(f"T5-I|S")
+    headerList.append(f"T5-PF|S")
+    headerList.append(f"T5-RF|S")
+    headerList.append(f"T5-NG|S")
+
+    headerList.append(f"T5-I|M")
+    headerList.append(f"T5-PF|M")
+    headerList.append(f"T5-RF|M")
+    headerList.append(f"T5-NG|M")
+
+    headerList.append(f"T5-I|VAR")
+    headerList.append(f"T5-PF|VAR")
+    headerList.append(f"T5-RF|VAR")
+    headerList.append(f"T5-NG|VAR")
+
+    headerList.append(f"T5-I|SD")
+    headerList.append(f"T5-PF|SD")
+    headerList.append(f"T5-RF|SD")
+    headerList.append(f"T5-NG|SD")
+
+    for _ in range(10-5):
+        headerList.append(f"T6-I|{_}+{_+5}")
+        headerList.append(f"T6-PF|{_}+{_+5}")
+        headerList.append(f"T6-RF|{_}+{_+5}")
+        headerList.append(f"T6-NG|{_}+{_+5}")
+    headerList.append(f"T6-I|S")
+    headerList.append(f"T6-PF|S")
+    headerList.append(f"T6-RF|S")
+    headerList.append(f"T6-NG|S")
+
+    headerList.append(f"T6-I|M")
+    headerList.append(f"T6-PF|M")
+    headerList.append(f"T6-RF|M")
+    headerList.append(f"T6-NG|M")
+
+    headerList.append(f"T6-I|VAR")
+    headerList.append(f"T6-PF|VAR")
+    headerList.append(f"T6-RF|VAR")
+    headerList.append(f"T6-NG|VAR")
+
+    headerList.append(f"T6-I|SD")
+    headerList.append(f"T6-PF|SD")
+    headerList.append(f"T6-RF|SD")
+    headerList.append(f"T6-NG|SD")
+
+    for _ in range(10-6):
+        headerList.append(f"T7-I|{_}+{_+6}")
+        headerList.append(f"T7-PF|{_}+{_+6}")
+        headerList.append(f"T7-RF|{_}+{_+6}")
+        headerList.append(f"T7-NG|{_}+{_+6}")
+
+    headerList.append(f"T7-I|S")
+    headerList.append(f"T7-PF|S")
+    headerList.append(f"T7-RF|S")
+    headerList.append(f"T7-NG|S")
+
+    headerList.append(f"T7-I|M")
+    headerList.append(f"T7-PF|M")
+    headerList.append(f"T7-RF|M")
+    headerList.append(f"T7-NG|M")
+
+    headerList.append(f"T7-I|VAR")
+    headerList.append(f"T7-PF|VAR")
+    headerList.append(f"T7-RF|VAR")
+    headerList.append(f"T7-NG|VAR")
+
+    headerList.append(f"T7-I|SD")
+    headerList.append(f"T7-PF|SD")
+    headerList.append(f"T7-RF|SD")
+    headerList.append(f"T7-NG|SD")
+
+    for _ in range(10-7):
+        headerList.append(f"T8-I|{_}+{_+7}")
+        headerList.append(f"T8-PF|{_}+{_+7}")
+        headerList.append(f"T8-RF|{_}+{_+7}")
+        headerList.append(f"T8-NG|{_}+{_+7}")
 
 with open(csv_path, 'w', newline='') as file:
     dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
