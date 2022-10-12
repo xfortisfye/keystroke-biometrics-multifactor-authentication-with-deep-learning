@@ -1,7 +1,6 @@
 '''
-increase dataset
+enlarge dataset
 '''
-
 import csv
 import pandas as pd
 import os
@@ -22,7 +21,7 @@ export_csv_name = "pair_test_DR" + ".csv"
 export_csv_path = os.path.join(os.getcwd(), "12_pair_IRDR", export_csv_name)
 
 headerList = ['Subject', 'Sequence']
-for _ in range(3):
+for _ in range(2):
     headerList.append(f"T2-D|0")
     for _ in range(5-1):
         headerList.append(f"T2-I|{_}+{_+1}")
@@ -116,7 +115,7 @@ with open(export_csv_path, 'w', newline='') as file:
     dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
     dw.writeheader()
 
-    print(f"CSV file will be created: {export_csv_path}")
+    print(f"\nCSV file will be created: {export_csv_path}")
 
 with open(export_csv_path, 'a', newline='') as file:
     writer = csv.writer(file)
@@ -165,3 +164,5 @@ with open(export_csv_path, 'a', newline='') as file:
     #                     placeholder.extend(import_csv.iloc[third_row, FEATURES_COL:].values.tolist())
     #                     writer.writerow([*placeholder])
     #                     placeholder.clear()
+
+print(f"\nCSV file has been enlarged and saved at: {export_csv_path}")

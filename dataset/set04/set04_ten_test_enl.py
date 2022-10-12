@@ -1,7 +1,6 @@
 '''
-increase dataset
+enlarge dataset
 '''
-
 import csv
 import pandas as pd
 import os
@@ -183,7 +182,7 @@ with open(export_csv_path, 'w', newline='') as file:
     dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
     dw.writeheader()
 
-    print(f"CSV file will be created: {export_csv_path}")
+    print(f"\nCSV file will be created: {export_csv_path}")
 
 with open(export_csv_path, 'a', newline='') as file:
     writer = csv.writer(file)
@@ -200,3 +199,5 @@ with open(export_csv_path, 'a', newline='') as file:
                     placeholder.extend(import_csv.iloc[sec_row, FEATURES_COL:].values.tolist())
                     writer.writerow([*placeholder])
                     placeholder.clear()
+
+print(f"\nCSV file has been enlarged and saved at: {export_csv_path}")

@@ -196,7 +196,6 @@ for _ in range(2):
     headerList.append(f"T8-RF|SD")
     headerList.append(f"T8-NG|SD")
 
-
     for _ in range(10-8):
         headerList.append(f"T9-I|{_}+{_+8}")
         headerList.append(f"T9-PF|{_}+{_+8}")
@@ -233,12 +232,13 @@ with open(export_csv_path, 'w', newline='') as file:
         dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
         dw.writeheader()
 
-print(f"CSV file will be created: {export_csv_path}")
+print(f"\nCSV file will be created: {export_csv_path}")
 
 with open(export_csv_path, 'a', newline='') as file:
     writer = csv.writer(file)
         
     for body in range(0, 920, 92):
+        # class three
         for first in range(0, 23):
             for second in range(23, 92):
                 first_row = body + first
@@ -250,8 +250,8 @@ with open(export_csv_path, 'a', newline='') as file:
                 writer.writerow([*placeholder])
                 placeholder.clear()
 
+        # class four
         for first in range(23, 46):
-            # four
             for second in range(0, 23):
                 first_row = body + first
                 placeholder = import_csv.iloc[first_row].values.tolist()
@@ -272,8 +272,8 @@ with open(export_csv_path, 'a', newline='') as file:
                 writer.writerow([*placeholder])
                 placeholder.clear()
 
+        # class five
         for first in range(46, 69):
-            # five
             for second in range(0, 46):
                 first_row = body + first
                 placeholder = import_csv.iloc[first_row].values.tolist()
@@ -294,8 +294,8 @@ with open(export_csv_path, 'a', newline='') as file:
                 writer.writerow([*placeholder])
                 placeholder.clear()
 
+        # class six
         for first in range(69, 92):
-            # six
             for second in range(0, 69):
                 first_row = body + first
                 placeholder = import_csv.iloc[first_row].values.tolist()
@@ -305,3 +305,5 @@ with open(export_csv_path, 'a', newline='') as file:
 
                 writer.writerow([*placeholder])
                 placeholder.clear()
+
+print(f"\nCSV file has been enlarged and saved at: {export_csv_path}")

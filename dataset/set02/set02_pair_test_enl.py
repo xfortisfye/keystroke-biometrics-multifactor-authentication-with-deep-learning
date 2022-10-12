@@ -1,12 +1,16 @@
 '''
-increase dataset
+enlarge dataset
 '''
 import csv
 import pandas as pd
 import os
 
-import_csv = pd.read_csv("01_original/" + "test.csv")
-export_csv_name = "pair_test" + ".csv"
+import_csv = pd.read_csv("01_original/" + "test_IR.csv")
+export_csv_name = "pair_test_IR" + ".csv"
+export_csv_path = os.path.join(os.getcwd(), "02_pair", export_csv_name)
+
+import_csv = pd.read_csv("01_original/" + "test_DR.csv")
+export_csv_name = "pair_test_DR" + ".csv"
 export_csv_path = os.path.join(os.getcwd(), "02_pair", export_csv_name)
 
 headerList = ['Subject', 'Class', 'Sequence']
@@ -196,7 +200,6 @@ for _ in range(2):
     headerList.append(f"T8-RF|SD")
     headerList.append(f"T8-NG|SD")
 
-
     for _ in range(10-8):
         headerList.append(f"T9-I|{_}+{_+8}")
         headerList.append(f"T9-PF|{_}+{_+8}")
@@ -229,17 +232,17 @@ for _ in range(2):
         headerList.append(f"T10-RF|{_}+{_+9}")
         headerList.append(f"T10-NG|{_}+{_+9}")
 
-
 with open(export_csv_path, 'w', newline='') as file:
         dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
         dw.writeheader()
 
-print(f"CSV file will be created: {export_csv_path}")
+print(f"\nCSV file will be created: {export_csv_path}")
 
 with open(export_csv_path, 'a', newline='') as file:
     writer = csv.writer(file)
         
     for body in range(0, 80, 8):
+        # class three
         for first in range(0, 2):
             for second in range(2, 8):
                 first_row = body + first
@@ -251,8 +254,8 @@ with open(export_csv_path, 'a', newline='') as file:
                 writer.writerow([*placeholder])
                 placeholder.clear()
 
+        # class four
         for first in range(2, 4):
-            # four
             for second in range(0, 2):
                 first_row = body + first
                 placeholder = import_csv.iloc[first_row].values.tolist()
@@ -273,8 +276,8 @@ with open(export_csv_path, 'a', newline='') as file:
                 writer.writerow([*placeholder])
                 placeholder.clear()
 
+        # class five
         for first in range(4, 6):
-            # five
             for second in range(0, 4):
                 first_row = body + first
                 placeholder = import_csv.iloc[first_row].values.tolist()
@@ -295,8 +298,8 @@ with open(export_csv_path, 'a', newline='') as file:
                 writer.writerow([*placeholder])
                 placeholder.clear()
 
+        # class six
         for first in range(6, 8):
-            # six
             for second in range(0, 6):
                 first_row = body + first
                 placeholder = import_csv.iloc[first_row].values.tolist()
@@ -306,3 +309,5 @@ with open(export_csv_path, 'a', newline='') as file:
 
                 writer.writerow([*placeholder])
                 placeholder.clear()
+
+print(f"\nCSV file has been enlarged and saved at: {export_csv_path}")
