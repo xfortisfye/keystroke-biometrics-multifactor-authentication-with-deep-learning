@@ -1,35 +1,18 @@
 '''
 increase dataset
 '''
-import time
 import csv
 import pandas as pd
 import os
-from sys import exit
 
-FEATURES_COL = 2
-export_dir_path = os.path.join(os.getcwd(), "export")
+import_csv = pd.read_csv("01_original/" + "test.csv")
+export_csv_name = "pair_test" + ".csv"
+export_csv_path = os.path.join(os.getcwd(), "02_pair", export_csv_name)
 
-# csv_name = "flm2m_rand194-train" + ".csv"
-# csv_path = os.path.join(export_dir_path, csv_name)
-# small_df = pd.read_csv("dataset/" + "rand97_train.csv")
-
-# csv_name = "flm2m_fr194-train" + ".csv"
-# csv_path = os.path.join(export_dir_path, csv_name)
-# small_df = pd.read_csv("dataset/" + "fr97_train.csv")
-
-# csv_name = "flm2m_rand291_train" + ".csv"
-# csv_path = os.path.join(export_dir_path, csv_name)
-# small_df = pd.read_csv("dataset/" + "fr97_train.csv")
-
-csv_name = "flm2m_fr291_train" + ".csv"
-csv_path = os.path.join(export_dir_path, csv_name)
-small_df = pd.read_csv("dataset/" + "fr97_train.csv")
-
-headerList = ['Subject', 'Password']
+headerList = ['Subject', 'Class', 'Sequence']
 for _ in range(2):
     headerList.append(f"T2-D|0")
-    for _ in range(8-1):
+    for _ in range(10-1):
         headerList.append(f"T2-I|{_}+{_+1}")
         headerList.append(f"T2-PF|{_}+{_+1}")
         headerList.append(f"T2-RF|{_}+{_+1}")
@@ -59,7 +42,7 @@ for _ in range(2):
     headerList.append(f"T2-RF|SD")
     headerList.append(f"T2-NG|SD")
 
-    for _ in range(8-2):
+    for _ in range(10-2):
         headerList.append(f"T3-I|{_}+{_+2}")
         headerList.append(f"T3-PF|{_}+{_+2}")
         headerList.append(f"T3-RF|{_}+{_+2}")
@@ -85,7 +68,7 @@ for _ in range(2):
     headerList.append(f"T3-RF|SD")
     headerList.append(f"T3-NG|SD")
 
-    for _ in range(8-3):
+    for _ in range(10-3):
         headerList.append(f"T4-I|{_}+{_+3}")
         headerList.append(f"T4-PF|{_}+{_+3}")
         headerList.append(f"T4-RF|{_}+{_+3}")
@@ -111,7 +94,7 @@ for _ in range(2):
     headerList.append(f"T4-RF|SD")
     headerList.append(f"T4-NG|SD")
 
-    for _ in range(8-4):
+    for _ in range(10-4):
         headerList.append(f"T5-I|{_}+{_+4}")
         headerList.append(f"T5-PF|{_}+{_+4}")
         headerList.append(f"T5-RF|{_}+{_+4}")
@@ -136,7 +119,7 @@ for _ in range(2):
     headerList.append(f"T5-RF|SD")
     headerList.append(f"T5-NG|SD")
 
-    for _ in range(8-5):
+    for _ in range(10-5):
         headerList.append(f"T6-I|{_}+{_+5}")
         headerList.append(f"T6-PF|{_}+{_+5}")
         headerList.append(f"T6-RF|{_}+{_+5}")
@@ -161,7 +144,7 @@ for _ in range(2):
     headerList.append(f"T6-RF|SD")
     headerList.append(f"T6-NG|SD")
 
-    for _ in range(8-6):
+    for _ in range(10-6):
         headerList.append(f"T7-I|{_}+{_+6}")
         headerList.append(f"T7-PF|{_}+{_+6}")
         headerList.append(f"T7-RF|{_}+{_+6}")
@@ -187,11 +170,65 @@ for _ in range(2):
     headerList.append(f"T7-RF|SD")
     headerList.append(f"T7-NG|SD")
 
-    for _ in range(8-7):
+    for _ in range(10-7):
         headerList.append(f"T8-I|{_}+{_+7}")
         headerList.append(f"T8-PF|{_}+{_+7}")
         headerList.append(f"T8-RF|{_}+{_+7}")
         headerList.append(f"T8-NG|{_}+{_+7}")
+
+    headerList.append(f"T8-I|S")
+    headerList.append(f"T8-PF|S")
+    headerList.append(f"T8-RF|S")
+    headerList.append(f"T8-NG|S")
+
+    headerList.append(f"T8-I|M")
+    headerList.append(f"T8-PF|M")
+    headerList.append(f"T8-RF|M")
+    headerList.append(f"T8-NG|M")
+
+    headerList.append(f"T8-I|VAR")
+    headerList.append(f"T8-PF|VAR")
+    headerList.append(f"T8-RF|VAR")
+    headerList.append(f"T8-NG|VAR")
+
+    headerList.append(f"T8-I|SD")
+    headerList.append(f"T8-PF|SD")
+    headerList.append(f"T8-RF|SD")
+    headerList.append(f"T8-NG|SD")
+
+
+    for _ in range(10-8):
+        headerList.append(f"T9-I|{_}+{_+8}")
+        headerList.append(f"T9-PF|{_}+{_+8}")
+        headerList.append(f"T9-RF|{_}+{_+8}")
+        headerList.append(f"T9-NG|{_}+{_+8}")
+        
+    headerList.append(f"T9-I|S")
+    headerList.append(f"T9-PF|S")
+    headerList.append(f"T9-RF|S")
+    headerList.append(f"T9-NG|S")
+
+    headerList.append(f"T9-I|M")
+    headerList.append(f"T9-PF|M")
+    headerList.append(f"T9-RF|M")
+    headerList.append(f"T9-NG|M")
+
+    headerList.append(f"T9-I|VAR")
+    headerList.append(f"T9-PF|VAR")
+    headerList.append(f"T9-RF|VAR")
+    headerList.append(f"T9-NG|VAR")
+
+    headerList.append(f"T9-I|SD")
+    headerList.append(f"T9-PF|SD")
+    headerList.append(f"T9-RF|SD")
+    headerList.append(f"T9-NG|SD")
+
+    for _ in range(10-9):
+        headerList.append(f"T10-I|{_}+{_+9}")
+        headerList.append(f"T10-PF|{_}+{_+9}")
+        headerList.append(f"T10-RF|{_}+{_+9}")
+        headerList.append(f"T10-NG|{_}+{_+9}")
+
 
 with open(csv_path, 'w', newline='') as file:
         dw = csv.DictWriter(file, delimiter=',',fieldnames=headerList)
@@ -201,48 +238,71 @@ print(f"CSV file will be created: {csv_path}")
 
 with open(csv_path, 'a', newline='') as file:
     writer = csv.writer(file)
-    
-    # for outer in range(0, 800, 100):
-    #     for first in range(0, 100):
-    #         for second in range(0, 100):
-    #             if second == first:
-    #                 pass
-    #             else:    
-    #                 first_row = outer + first
-    #                 placeholder = small_df.iloc[first_row].values.tolist()
-    #                 sec_row = outer + second
-    #                 placeholder.extend(small_df.iloc[sec_row, FEATURES_COL:].values.tolist())
-    #                 writer.writerow([*placeholder])
-    #                 placeholder.clear()
+        
+    for body in range(0, 80, 8):
+        for first in range(0, 2):
+            for second in range(2, 8):
+                first_row = body + first
+                placeholder = import_csv.iloc[first_row].values.tolist()
+                
+                sec_row = body + second
+                placeholder.extend(import_csv.iloc[sec_row, 3:].values.tolist())
 
-    # for outer in range(0, 800, 100):
-    #     for first in range(0, 100):
-    #         for second in range(0, 100):
-    #             for third in range(0, 100):
-    #                 if second == first or third == first or third == second:
-    #                     pass
-    #                 else:    
-    #                     first_row = outer + first
-    #                     placeholder = small_df.iloc[first_row].values.tolist()
-    #                     sec_row = outer + second
-    #                     placeholder.extend(small_df.iloc[sec_row, FEATURES_COL:].values.tolist())
-    #                     third_row = outer + third
-    #                     placeholder.extend(small_df.iloc[third_row, FEATURES_COL:].values.tolist())
-    #                     writer.writerow([*placeholder])
-    #                     placeholder.clear()
+                writer.writerow([*placeholder])
+                placeholder.clear()
 
-    for outer in range(0, 800, 100):
-        for first in range(0, 33):
-            for second in range(33, 66):
-                for third in range(66, 99):
-                    if second == first or second == third or first == third:
-                        pass
-                    else:    
-                        first_row = outer + first
-                        placeholder = small_df.iloc[first_row].values.tolist()
-                        sec_row = outer + second
-                        placeholder.extend(small_df.iloc[sec_row, FEATURES_COL:].values.tolist())
-                        third_row = outer + third
-                        placeholder.extend(small_df.iloc[third_row, FEATURES_COL:].values.tolist())
-                        writer.writerow([*placeholder])
-                        placeholder.clear()
+        for first in range(2, 4):
+            # four
+            for second in range(0, 2):
+                first_row = body + first
+                placeholder = import_csv.iloc[first_row].values.tolist()
+                
+                sec_row = body + second
+                placeholder.extend(import_csv.iloc[sec_row, 3:].values.tolist())
+
+                writer.writerow([*placeholder])
+                placeholder.clear()
+
+            for second in range(4, 8):
+                first_row = body + first
+                placeholder = import_csv.iloc[first_row].values.tolist()
+                
+                sec_row = body + second
+                placeholder.extend(import_csv.iloc[sec_row, 3:].values.tolist())
+
+                writer.writerow([*placeholder])
+                placeholder.clear()
+
+        for first in range(4, 6):
+            # five
+            for second in range(0, 4):
+                first_row = body + first
+                placeholder = import_csv.iloc[first_row].values.tolist()
+                
+                sec_row = body + second
+                placeholder.extend(import_csv.iloc[sec_row, 3:].values.tolist())
+
+                writer.writerow([*placeholder])
+                placeholder.clear()
+
+            for second in range(6, 8):
+                first_row = body + first
+                placeholder = import_csv.iloc[first_row].values.tolist()
+                
+                sec_row = body + second
+                placeholder.extend(import_csv.iloc[sec_row, 3:].values.tolist())
+
+                writer.writerow([*placeholder])
+                placeholder.clear()
+
+        for first in range(6, 8):
+            # six
+            for second in range(0, 6):
+                first_row = body + first
+                placeholder = import_csv.iloc[first_row].values.tolist()
+                
+                sec_row = body + second
+                placeholder.extend(import_csv.iloc[sec_row, 3:].values.tolist())
+
+                writer.writerow([*placeholder])
+                placeholder.clear()
