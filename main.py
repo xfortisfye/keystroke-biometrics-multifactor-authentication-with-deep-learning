@@ -676,7 +676,7 @@ def main():
             merge_csv_name = "df_own_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
-            csv_name_full = "full_own_" + name + ".csv"
+            csv_name_full = "original_own_" + name + ".csv"
             csv_path_full = os.path.join(export_dir_path, csv_name_full)
 
             csv_name_nostat = "nostat_own_" + name + ".csv"
@@ -909,7 +909,7 @@ def main():
             merge_csv_name = "df_same_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
-            csv_name_full = "full_same_" + name + ".csv"
+            csv_name_full = "original_same_" + name + ".csv"
             csv_path_full = os.path.join(export_dir_path, csv_name_full)
 
             csv_name_nostat = "nostat_same_" + name + ".csv"
