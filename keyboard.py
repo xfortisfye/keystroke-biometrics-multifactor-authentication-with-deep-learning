@@ -386,7 +386,6 @@ class Keyboard():
             nine_rf_list.clear()
             nine_ng_list.clear()
 
-
     def export_to_csv_2(self, password):
         # time.sleep(0.5)
         seq_no = password.find(" ")
@@ -459,8 +458,6 @@ class Keyboard():
                 writer = csv.writer(file)
                 writer.writerow([self.get_name(), str_key, int_key, str(init_num_key), str(end_num_key), str(seq_no), str(current_dwell_time), str(interval_time),
                     str(press_flight_time), str(release_flight_time),str(digraph_time), str(later_dwell_time)])
-
-
 
         with open(self.get_csv(), 'a', newline='') as file:
             placeholder = [merge_df.iloc[0]["release_time"] - merge_df.iloc[0]["press_time"]]
@@ -710,7 +707,6 @@ class Keyboard():
                 str(stdev(two_dwell_list)), str(stdev(two_int_list)), str(stdev(two_pf_list)), str(stdev(two_rf_list)), str(stdev(two_ng_list))])
 
             for row in range(0,3):
-                
                 three_int_time = merge_df.iloc[row+2]["press_time"] - merge_df.iloc[row]["release_time"]
                 three_pf_time = merge_df.iloc[row+2]["press_time"] - merge_df.iloc[row]["press_time"]
                 three_rf_time = merge_df.iloc[row+2]["release_time"] - merge_df.iloc[row]["release_time"]
@@ -726,9 +722,7 @@ class Keyboard():
                 str(variance(three_int_list)), str(variance(three_pf_list)), str(variance(three_rf_list)), str(variance(three_ng_list)),
                 str(stdev(three_int_list)), str(stdev(three_pf_list)), str(stdev(three_rf_list)), str(stdev(three_ng_list))])
 
-
             for row in range(0,2):
-                
                 four_int_time = merge_df.iloc[row+3]["press_time"] - merge_df.iloc[row]["release_time"]
                 four_pf_time = merge_df.iloc[row+3]["press_time"] - merge_df.iloc[row]["press_time"]
                 four_rf_time = merge_df.iloc[row+3]["release_time"] - merge_df.iloc[row]["release_time"]
@@ -751,7 +745,6 @@ class Keyboard():
                 five_graph_time = merge_df.iloc[row+4]["release_time"] - merge_df.iloc[row]["press_time"]
                 placeholder.extend([str(five_int_time), str(five_pf_time), str(five_rf_time), str(five_graph_time)])
 
-            
             writer = csv.writer(file)
             writer.writerow([self.get_name(), password, *placeholder])
             placeholder.clear()
@@ -871,8 +864,6 @@ class Keyboard():
                 str(variance(four_int_list)), str(variance(four_pf_list)), str(variance(four_rf_list)), str(variance(four_ng_list)),
                 str(stdev(four_int_list)), str(stdev(four_pf_list)), str(stdev(four_rf_list)), str(stdev(four_ng_list))])
 
-  
-
             for row in range(0, maxPwdLen-4):
                 five_int_time = merge_df.iloc[row+4]["press_time"] - merge_df.iloc[row]["release_time"]
                 five_pf_time = merge_df.iloc[row+4]["press_time"] - merge_df.iloc[row]["press_time"]
@@ -904,7 +895,6 @@ class Keyboard():
                 str(fmean(six_int_list)), str(fmean(six_pf_list)), str(fmean(six_rf_list)), str(fmean(six_ng_list)),
                 str(variance(six_int_list)), str(variance(six_pf_list)), str(variance(six_rf_list)), str(variance(six_ng_list)),
                 str(stdev(six_int_list)), str(stdev(six_pf_list)), str(stdev(six_rf_list)), str(stdev(six_ng_list))])
-
 
             for row in range(0, maxPwdLen-6):
                 seven_int_time = merge_df.iloc[row+6]["press_time"] - merge_df.iloc[row]["release_time"]
@@ -976,7 +966,6 @@ class Keyboard():
                 placeholder.extend([str(interval_time), str(press_flight_time),str(release_flight_time), str(digraph_time),
                 str(later_dwell_time)])
 
-
             for row in range(0, maxPwdLen-2):
                 three_int_time = merge_df.iloc[row+2]["press_time"] - merge_df.iloc[row]["release_time"]
                 three_pf_time = merge_df.iloc[row+2]["press_time"] - merge_df.iloc[row]["press_time"]
@@ -984,7 +973,6 @@ class Keyboard():
                 three_graph_time = merge_df.iloc[row+2]["release_time"] - merge_df.iloc[row]["press_time"]
                 placeholder.extend([str(three_int_time), str(three_pf_time), str(three_rf_time), str(three_graph_time)])
                 
-
             for row in range(0, maxPwdLen-3):
                 four_int_time = merge_df.iloc[row+3]["press_time"] - merge_df.iloc[row]["release_time"]
                 four_pf_time = merge_df.iloc[row+3]["press_time"] - merge_df.iloc[row]["press_time"]

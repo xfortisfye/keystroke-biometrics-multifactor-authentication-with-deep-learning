@@ -4,7 +4,6 @@ combi
 import os
 import platform
 import time
-from sys import exit
 
 # keyboard
 from pynput.keyboard import Key, Listener
@@ -15,6 +14,14 @@ import random
 
 def main():
     startFlag = True
+
+    FULL_FEATURES = ["D", "I", "PF", "RF", "NG"]
+    SUB_FEATURES = ["I", "PF", "RF", "NG"]
+    STAT_FEATURES = ["S", "M", "VAR", "SD"]
+
+    CYCLE = 0
+    NGRAPH_COUNT = 0
+    MIDDLE_NGRAPH = 3 # do not change value.
 
     while startFlag is True:
         print("What kind of dataset will you like to generate? \n"
@@ -35,6 +42,7 @@ def main():
             captcha = []    
 
             export_dir_path = prelude(name)
+            CHAR_COUNT = 10
             
             '''
             create merge_df csv file
@@ -63,222 +71,39 @@ def main():
             else:
                 # assign header columns
                 headerList = ['Subject', 'Class', 'Sequence']
-                headerList.append(f"T2-D|0")
-                for _ in range(10-1):
-                    headerList.append(f"T2-I|{_}+{_+1}")
-                    headerList.append(f"T2-PF|{_}+{_+1}")
-                    headerList.append(f"T2-RF|{_}+{_+1}")
-                    # headerList.append(f"T2-NG|{_}+{_+1}")
-                    headerList.append(f"T2-D|{_+1}")
-                # headerList.append(f"T2-D|S")
-                # headerList.append(f"T2-I|S")
-                # headerList.append(f"T2-PF|S")
-                # headerList.append(f"T2-RF|S")
-                # headerList.append(f"T2-NG|S")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = CYCLE + 1
 
-                # headerList.append(f"T2-D|M")
-                # headerList.append(f"T2-I|M")
-                # headerList.append(f"T2-PF|M")
-                # headerList.append(f"T2-RF|M")
-                # headerList.append(f"T2-DT-M")
+                headerList.append(f"T{NGRAPH_COUNT}-D|0")
+                
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    headerList.append(f"T{NGRAPH_COUNT}-D|{position+CYCLE}")
 
-                # headerList.append(f"T2-D|VAR")
-                # headerList.append(f"T2-I|VAR")
-                # headerList.append(f"T2-PF|VAR")
-                # headerList.append(f"T2-RF|VAR")
-                # headerList.append(f"T2-DT-VAR")
+                for stat in range(len(STAT_FEATURES)):
+                    for full in range(len(FULL_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{FULL_FEATURES[full]}|{STAT_FEATURES[stat]}")
 
-                # headerList.append(f"T2-D|SD")
-                # headerList.append(f"T2-I|SD")
-                # headerList.append(f"T2-PF|SD")
-                # headerList.append(f"T2-RF|SD")
-                # headerList.append(f"T2-NG|SD")
+                for _ in range(CHAR_COUNT-MIDDLE_NGRAPH):
+                    CYCLE = CYCLE + 1
+                    NGRAPH_COUNT = NGRAPH_COUNT + 1
+                    for position in range(CHAR_COUNT-CYCLE):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    for stat in range(len(STAT_FEATURES)):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{STAT_FEATURES[stat]}")
 
-                # for _ in range(10-2):
-                #     headerList.append(f"T3-I|{_}+{_+2}")
-                #     headerList.append(f"T3-PF|{_}+{_+2}")
-                #     headerList.append(f"T3-RF|{_}+{_+2}")
-                #     headerList.append(f"T3-NG|{_}+{_+2}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = NGRAPH_COUNT + 1
 
-                # headerList.append(f"T3-I|S")
-                # headerList.append(f"T3-PF|S")
-                # headerList.append(f"T3-RF|S")
-                # headerList.append(f"T3-NG|S")
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
 
-                # headerList.append(f"T3-I|M")
-                # headerList.append(f"T3-PF|M")
-                # headerList.append(f"T3-RF|M")
-                # headerList.append(f"T3-NG|M")
-
-                # headerList.append(f"T3-I|VAR")
-                # headerList.append(f"T3-PF|VAR")
-                # headerList.append(f"T3-RF|VAR")
-                # headerList.append(f"T3-NG|VAR")
-
-                # headerList.append(f"T3-I|SD")
-                # headerList.append(f"T3-PF|SD")
-                # headerList.append(f"T3-RF|SD")
-                # headerList.append(f"T3-NG|SD")
-
-                # for _ in range(10-3):
-                #     headerList.append(f"T4-I|{_}+{_+3}")
-                #     headerList.append(f"T4-PF|{_}+{_+3}")
-                #     headerList.append(f"T4-RF|{_}+{_+3}")
-                #     headerList.append(f"T4-NG|{_}+{_+3}")
-
-                # headerList.append(f"T4-I|S")
-                # headerList.append(f"T4-PF|S")
-                # headerList.append(f"T4-RF|S")
-                # headerList.append(f"T4-NG|S")
-
-                # headerList.append(f"T4-I|M")
-                # headerList.append(f"T4-PF|M")
-                # headerList.append(f"T4-RF|M")
-                # headerList.append(f"T4-NG|M")
-
-                # headerList.append(f"T4-I|VAR")
-                # headerList.append(f"T4-PF|VAR")
-                # headerList.append(f"T4-RF|VAR")
-                # headerList.append(f"T4-NG|VAR")
-
-                # headerList.append(f"T4-I|SD")
-                # headerList.append(f"T4-PF|SD")
-                # headerList.append(f"T4-RF|SD")
-                # headerList.append(f"T4-NG|SD")
-
-                # for _ in range(10-4):
-                #     headerList.append(f"T5-I|{_}+{_+4}")
-                #     headerList.append(f"T5-PF|{_}+{_+4}")
-                #     headerList.append(f"T5-RF|{_}+{_+4}")
-                #     headerList.append(f"T5-NG|{_}+{_+4}")
-                # headerList.append(f"T5-I|S")
-                # headerList.append(f"T5-PF|S")
-                # headerList.append(f"T5-RF|S")
-                # headerList.append(f"T5-NG|S")
-
-                # headerList.append(f"T5-I|M")
-                # headerList.append(f"T5-PF|M")
-                # headerList.append(f"T5-RF|M")
-                # headerList.append(f"T5-NG|M")
-
-                # headerList.append(f"T5-I|VAR")
-                # headerList.append(f"T5-PF|VAR")
-                # headerList.append(f"T5-RF|VAR")
-                # headerList.append(f"T5-NG|VAR")
-
-                # headerList.append(f"T5-I|SD")
-                # headerList.append(f"T5-PF|SD")
-                # headerList.append(f"T5-RF|SD")
-                # headerList.append(f"T5-NG|SD")
-
-                # for _ in range(10-5):
-                #     headerList.append(f"T6-I|{_}+{_+5}")
-                #     headerList.append(f"T6-PF|{_}+{_+5}")
-                #     headerList.append(f"T6-RF|{_}+{_+5}")
-                #     headerList.append(f"T6-NG|{_}+{_+5}")
-                # headerList.append(f"T6-I|S")
-                # headerList.append(f"T6-PF|S")
-                # headerList.append(f"T6-RF|S")
-                # headerList.append(f"T6-NG|S")
-
-                # headerList.append(f"T6-I|M")
-                # headerList.append(f"T6-PF|M")
-                # headerList.append(f"T6-RF|M")
-                # headerList.append(f"T6-NG|M")
-
-                # headerList.append(f"T6-I|VAR")
-                # headerList.append(f"T6-PF|VAR")
-                # headerList.append(f"T6-RF|VAR")
-                # headerList.append(f"T6-NG|VAR")
-
-                # headerList.append(f"T6-I|SD")
-                # headerList.append(f"T6-PF|SD")
-                # headerList.append(f"T6-RF|SD")
-                # headerList.append(f"T6-NG|SD")
-
-                # for _ in range(10-6):
-                #     headerList.append(f"T7-I|{_}+{_+6}")
-                #     headerList.append(f"T7-PF|{_}+{_+6}")
-                #     headerList.append(f"T7-RF|{_}+{_+6}")
-                #     headerList.append(f"T7-NG|{_}+{_+6}")
-
-                # headerList.append(f"T7-I|S")
-                # headerList.append(f"T7-PF|S")
-                # headerList.append(f"T7-RF|S")
-                # headerList.append(f"T7-NG|S")
-
-                # headerList.append(f"T7-I|M")
-                # headerList.append(f"T7-PF|M")
-                # headerList.append(f"T7-RF|M")
-                # headerList.append(f"T7-NG|M")
-
-                # headerList.append(f"T7-I|VAR")
-                # headerList.append(f"T7-PF|VAR")
-                # headerList.append(f"T7-RF|VAR")
-                # headerList.append(f"T7-NG|VAR")
-
-                # headerList.append(f"T7-I|SD")
-                # headerList.append(f"T7-PF|SD")
-                # headerList.append(f"T7-RF|SD")
-                # headerList.append(f"T7-NG|SD")
-
-                # for _ in range(10-7):
-                #     headerList.append(f"T8-I|{_}+{_+7}")
-                #     headerList.append(f"T8-PF|{_}+{_+7}")
-                #     headerList.append(f"T8-RF|{_}+{_+7}")
-                #     headerList.append(f"T8-NG|{_}+{_+7}")
-
-                # headerList.append(f"T8-I|S")
-                # headerList.append(f"T8-PF|S")
-                # headerList.append(f"T8-RF|S")
-                # headerList.append(f"T8-NG|S")
-
-                # headerList.append(f"T8-I|M")
-                # headerList.append(f"T8-PF|M")
-                # headerList.append(f"T8-RF|M")
-                # headerList.append(f"T8-NG|M")
-
-                # headerList.append(f"T8-I|VAR")
-                # headerList.append(f"T8-PF|VAR")
-                # headerList.append(f"T8-RF|VAR")
-                # headerList.append(f"T8-NG|VAR")
-
-                # headerList.append(f"T8-I|SD")
-                # headerList.append(f"T8-PF|SD")
-                # headerList.append(f"T8-RF|SD")
-                # headerList.append(f"T8-NG|SD")
-
-                # for _ in range(10-8):
-                #     headerList.append(f"T9-I|{_}+{_+8}")
-                #     headerList.append(f"T9-PF|{_}+{_+8}")
-                #     headerList.append(f"T9-RF|{_}+{_+8}")
-                #     headerList.append(f"T9-NG|{_}+{_+8}")
-                    
-                # headerList.append(f"T9-I|S")
-                # headerList.append(f"T9-PF|S")
-                # headerList.append(f"T9-RF|S")
-                # headerList.append(f"T9-NG|S")
-
-                # headerList.append(f"T9-I|M")
-                # headerList.append(f"T9-PF|M")
-                # headerList.append(f"T9-RF|M")
-                # headerList.append(f"T9-NG|M")
-
-                # headerList.append(f"T9-I|VAR")
-                # headerList.append(f"T9-PF|VAR")
-                # headerList.append(f"T9-RF|VAR")
-                # headerList.append(f"T9-NG|VAR")
-
-                # headerList.append(f"T9-I|SD")
-                # headerList.append(f"T9-PF|SD")
-                # headerList.append(f"T9-RF|SD")
-                # headerList.append(f"T9-NG|SD")
-
-                # for _ in range(10-9):
-                #     headerList.append(f"T10-I|{_}+{_+9}")
-                #     headerList.append(f"T10-PF|{_}+{_+9}")
-                #     headerList.append(f"T10-RF|{_}+{_+9}")
-                #     headerList.append(f"T10-NG|{_}+{_+9}")
+                CYCLE = 0
+                NGRAPH_COUNT = 0
                 
                 # open CSV file and assign header
                 with open(csv_path, 'w', newline='') as file:
@@ -358,6 +183,7 @@ def main():
             captcha = []    
 
             export_dir_path = prelude(name)
+            CHAR_COUNT = 10
 
             '''
             create merge_df csv file
@@ -386,226 +212,42 @@ def main():
 
             if os.path.isfile(csv_path_original) is True:
                 print(f"CSV file exist at {csv_path_original}")
-            else:
+            else:                
                 # assign header columns
                 headerList = ['Subject', 'Class', 'Sequence']
-                headerList.append(f"T2-D|0")
-                for _ in range(10-1):
-                    headerList.append(f"T2-I|{_}+{_+1}")
-                    headerList.append(f"T2-PF|{_}+{_+1}")
-                    headerList.append(f"T2-RF|{_}+{_+1}")
-                    headerList.append(f"T2-NG|{_}+{_+1}")
-                    headerList.append(f"T2-D|{_+1}")
-                headerList.append(f"T2-D|S")
-                headerList.append(f"T2-I|S")
-                headerList.append(f"T2-PF|S")
-                headerList.append(f"T2-RF|S")
-                headerList.append(f"T2-NG|S")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = CYCLE + 1
 
-                headerList.append(f"T2-D|M")
-                headerList.append(f"T2-I|M")
-                headerList.append(f"T2-PF|M")
-                headerList.append(f"T2-RF|M")
-                headerList.append(f"T2-DT-M")
+                headerList.append(f"T{NGRAPH_COUNT}-D|0")
+                
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    headerList.append(f"T{NGRAPH_COUNT}-D|{position+CYCLE}")
 
-                headerList.append(f"T2-D|VAR")
-                headerList.append(f"T2-I|VAR")
-                headerList.append(f"T2-PF|VAR")
-                headerList.append(f"T2-RF|VAR")
-                headerList.append(f"T2-DT-VAR")
+                for stat in range(len(STAT_FEATURES)):
+                    for full in range(len(FULL_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{FULL_FEATURES[full]}|{STAT_FEATURES[stat]}")
 
-                headerList.append(f"T2-D|SD")
-                headerList.append(f"T2-I|SD")
-                headerList.append(f"T2-PF|SD")
-                headerList.append(f"T2-RF|SD")
-                headerList.append(f"T2-NG|SD")
+                for _ in range(CHAR_COUNT-MIDDLE_NGRAPH):
+                    CYCLE = CYCLE + 1
+                    NGRAPH_COUNT = NGRAPH_COUNT + 1
+                    for position in range(CHAR_COUNT-CYCLE):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    for stat in range(len(STAT_FEATURES)):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{STAT_FEATURES[stat]}")
 
-                for _ in range(10-2):
-                    headerList.append(f"T3-I|{_}+{_+2}")
-                    headerList.append(f"T3-PF|{_}+{_+2}")
-                    headerList.append(f"T3-RF|{_}+{_+2}")
-                    headerList.append(f"T3-NG|{_}+{_+2}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = NGRAPH_COUNT + 1
 
-                headerList.append(f"T3-I|S")
-                headerList.append(f"T3-PF|S")
-                headerList.append(f"T3-RF|S")
-                headerList.append(f"T3-NG|S")
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
 
-                headerList.append(f"T3-I|M")
-                headerList.append(f"T3-PF|M")
-                headerList.append(f"T3-RF|M")
-                headerList.append(f"T3-NG|M")
-
-                headerList.append(f"T3-I|VAR")
-                headerList.append(f"T3-PF|VAR")
-                headerList.append(f"T3-RF|VAR")
-                headerList.append(f"T3-NG|VAR")
-
-                headerList.append(f"T3-I|SD")
-                headerList.append(f"T3-PF|SD")
-                headerList.append(f"T3-RF|SD")
-                headerList.append(f"T3-NG|SD")
-
-                for _ in range(10-3):
-                    headerList.append(f"T4-I|{_}+{_+3}")
-                    headerList.append(f"T4-PF|{_}+{_+3}")
-                    headerList.append(f"T4-RF|{_}+{_+3}")
-                    headerList.append(f"T4-NG|{_}+{_+3}")
-
-                headerList.append(f"T4-I|S")
-                headerList.append(f"T4-PF|S")
-                headerList.append(f"T4-RF|S")
-                headerList.append(f"T4-NG|S")
-
-                headerList.append(f"T4-I|M")
-                headerList.append(f"T4-PF|M")
-                headerList.append(f"T4-RF|M")
-                headerList.append(f"T4-NG|M")
-
-                headerList.append(f"T4-I|VAR")
-                headerList.append(f"T4-PF|VAR")
-                headerList.append(f"T4-RF|VAR")
-                headerList.append(f"T4-NG|VAR")
-
-                headerList.append(f"T4-I|SD")
-                headerList.append(f"T4-PF|SD")
-                headerList.append(f"T4-RF|SD")
-                headerList.append(f"T4-NG|SD")
-
-                for _ in range(10-4):
-                    headerList.append(f"T5-I|{_}+{_+4}")
-                    headerList.append(f"T5-PF|{_}+{_+4}")
-                    headerList.append(f"T5-RF|{_}+{_+4}")
-                    headerList.append(f"T5-NG|{_}+{_+4}")
-                headerList.append(f"T5-I|S")
-                headerList.append(f"T5-PF|S")
-                headerList.append(f"T5-RF|S")
-                headerList.append(f"T5-NG|S")
-
-                headerList.append(f"T5-I|M")
-                headerList.append(f"T5-PF|M")
-                headerList.append(f"T5-RF|M")
-                headerList.append(f"T5-NG|M")
-
-                headerList.append(f"T5-I|VAR")
-                headerList.append(f"T5-PF|VAR")
-                headerList.append(f"T5-RF|VAR")
-                headerList.append(f"T5-NG|VAR")
-
-                headerList.append(f"T5-I|SD")
-                headerList.append(f"T5-PF|SD")
-                headerList.append(f"T5-RF|SD")
-                headerList.append(f"T5-NG|SD")
-
-                for _ in range(10-5):
-                    headerList.append(f"T6-I|{_}+{_+5}")
-                    headerList.append(f"T6-PF|{_}+{_+5}")
-                    headerList.append(f"T6-RF|{_}+{_+5}")
-                    headerList.append(f"T6-NG|{_}+{_+5}")
-                headerList.append(f"T6-I|S")
-                headerList.append(f"T6-PF|S")
-                headerList.append(f"T6-RF|S")
-                headerList.append(f"T6-NG|S")
-
-                headerList.append(f"T6-I|M")
-                headerList.append(f"T6-PF|M")
-                headerList.append(f"T6-RF|M")
-                headerList.append(f"T6-NG|M")
-
-                headerList.append(f"T6-I|VAR")
-                headerList.append(f"T6-PF|VAR")
-                headerList.append(f"T6-RF|VAR")
-                headerList.append(f"T6-NG|VAR")
-
-                headerList.append(f"T6-I|SD")
-                headerList.append(f"T6-PF|SD")
-                headerList.append(f"T6-RF|SD")
-                headerList.append(f"T6-NG|SD")
-
-                for _ in range(10-6):
-                    headerList.append(f"T7-I|{_}+{_+6}")
-                    headerList.append(f"T7-PF|{_}+{_+6}")
-                    headerList.append(f"T7-RF|{_}+{_+6}")
-                    headerList.append(f"T7-NG|{_}+{_+6}")
-
-                headerList.append(f"T7-I|S")
-                headerList.append(f"T7-PF|S")
-                headerList.append(f"T7-RF|S")
-                headerList.append(f"T7-NG|S")
-
-                headerList.append(f"T7-I|M")
-                headerList.append(f"T7-PF|M")
-                headerList.append(f"T7-RF|M")
-                headerList.append(f"T7-NG|M")
-
-                headerList.append(f"T7-I|VAR")
-                headerList.append(f"T7-PF|VAR")
-                headerList.append(f"T7-RF|VAR")
-                headerList.append(f"T7-NG|VAR")
-
-                headerList.append(f"T7-I|SD")
-                headerList.append(f"T7-PF|SD")
-                headerList.append(f"T7-RF|SD")
-                headerList.append(f"T7-NG|SD")
-
-                for _ in range(10-7):
-                    headerList.append(f"T8-I|{_}+{_+7}")
-                    headerList.append(f"T8-PF|{_}+{_+7}")
-                    headerList.append(f"T8-RF|{_}+{_+7}")
-                    headerList.append(f"T8-NG|{_}+{_+7}")
-
-                headerList.append(f"T8-I|S")
-                headerList.append(f"T8-PF|S")
-                headerList.append(f"T8-RF|S")
-                headerList.append(f"T8-NG|S")
-
-                headerList.append(f"T8-I|M")
-                headerList.append(f"T8-PF|M")
-                headerList.append(f"T8-RF|M")
-                headerList.append(f"T8-NG|M")
-
-                headerList.append(f"T8-I|VAR")
-                headerList.append(f"T8-PF|VAR")
-                headerList.append(f"T8-RF|VAR")
-                headerList.append(f"T8-NG|VAR")
-
-                headerList.append(f"T8-I|SD")
-                headerList.append(f"T8-PF|SD")
-                headerList.append(f"T8-RF|SD")
-                headerList.append(f"T8-NG|SD")
-
-
-                for _ in range(10-8):
-                    headerList.append(f"T9-I|{_}+{_+8}")
-                    headerList.append(f"T9-PF|{_}+{_+8}")
-                    headerList.append(f"T9-RF|{_}+{_+8}")
-                    headerList.append(f"T9-NG|{_}+{_+8}")
-                    
-                headerList.append(f"T9-I|S")
-                headerList.append(f"T9-PF|S")
-                headerList.append(f"T9-RF|S")
-                headerList.append(f"T9-NG|S")
-
-                headerList.append(f"T9-I|M")
-                headerList.append(f"T9-PF|M")
-                headerList.append(f"T9-RF|M")
-                headerList.append(f"T9-NG|M")
-
-                headerList.append(f"T9-I|VAR")
-                headerList.append(f"T9-PF|VAR")
-                headerList.append(f"T9-RF|VAR")
-                headerList.append(f"T9-NG|VAR")
-
-                headerList.append(f"T9-I|SD")
-                headerList.append(f"T9-PF|SD")
-                headerList.append(f"T9-RF|SD")
-                headerList.append(f"T9-NG|SD")
-
-                for _ in range(10-9):
-                    headerList.append(f"T10-I|{_}+{_+9}")
-                    headerList.append(f"T10-PF|{_}+{_+9}")
-                    headerList.append(f"T10-RF|{_}+{_+9}")
-                    headerList.append(f"T10-NG|{_}+{_+9}")
+                CYCLE = 0
+                NGRAPH_COUNT = 0
                 
                 # open CSV file and assign header
                 with open(csv_path_original, 'w', newline='') as file:
@@ -716,6 +358,7 @@ def main():
             captcha = []    
 
             export_dir_path = prelude(name)
+            CHAR_COUNT = 5
             
             '''
             create merge_df csv file
@@ -747,94 +390,39 @@ def main():
             else:
                 # assign header columns
                 headerList = ['Subject', 'Sequence']
-                headerList.append(f"T2-D|0")
-                for _ in range(5-1):
-                    headerList.append(f"T2-I|{_}+{_+1}")
-                    headerList.append(f"T2-PF|{_}+{_+1}")
-                    headerList.append(f"T2-RF|{_}+{_+1}")
-                    headerList.append(f"T2-NG|{_}+{_+1}")
-                    headerList.append(f"T2-D|{_+1}")
-                headerList.append(f"T2-D|S")
-                headerList.append(f"T2-I|S")
-                headerList.append(f"T2-PF|S")
-                headerList.append(f"T2-RF|S")
-                headerList.append(f"T2-NG|S")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = CYCLE + 1
 
-                headerList.append(f"T2-D|M")
-                headerList.append(f"T2-I|M")
-                headerList.append(f"T2-PF|M")
-                headerList.append(f"T2-RF|M")
-                headerList.append(f"T2-DT-M")
+                headerList.append(f"T{NGRAPH_COUNT}-D|0")
+                
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    headerList.append(f"T{NGRAPH_COUNT}-D|{position+CYCLE}")
 
-                headerList.append(f"T2-D|VAR")
-                headerList.append(f"T2-I|VAR")
-                headerList.append(f"T2-PF|VAR")
-                headerList.append(f"T2-RF|VAR")
-                headerList.append(f"T2-DT-VAR")
+                for stat in range(len(STAT_FEATURES)):
+                    for full in range(len(FULL_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{FULL_FEATURES[full]}|{STAT_FEATURES[stat]}")
 
-                headerList.append(f"T2-D|SD")
-                headerList.append(f"T2-I|SD")
-                headerList.append(f"T2-PF|SD")
-                headerList.append(f"T2-RF|SD")
-                headerList.append(f"T2-NG|SD")
+                for _ in range(CHAR_COUNT-MIDDLE_NGRAPH):
+                    CYCLE = CYCLE + 1
+                    NGRAPH_COUNT = NGRAPH_COUNT + 1
+                    for position in range(CHAR_COUNT-CYCLE):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    for stat in range(len(STAT_FEATURES)):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{STAT_FEATURES[stat]}")
 
-                for _ in range(5-2):
-                    headerList.append(f"T3-I|{_}+{_+2}")
-                    headerList.append(f"T3-PF|{_}+{_+2}")
-                    headerList.append(f"T3-RF|{_}+{_+2}")
-                    headerList.append(f"T3-NG|{_}+{_+2}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = NGRAPH_COUNT + 1
 
-                headerList.append(f"T3-I|S")
-                headerList.append(f"T3-PF|S")
-                headerList.append(f"T3-RF|S")
-                headerList.append(f"T3-NG|S")
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
 
-                headerList.append(f"T3-I|M")
-                headerList.append(f"T3-PF|M")
-                headerList.append(f"T3-RF|M")
-                headerList.append(f"T3-NG|M")
-
-                headerList.append(f"T3-I|VAR")
-                headerList.append(f"T3-PF|VAR")
-                headerList.append(f"T3-RF|VAR")
-                headerList.append(f"T3-NG|VAR")
-
-                headerList.append(f"T3-I|SD")
-                headerList.append(f"T3-PF|SD")
-                headerList.append(f"T3-RF|SD")
-                headerList.append(f"T3-NG|SD")
-
-                for _ in range(5-3):
-                    headerList.append(f"T4-I|{_}+{_+3}")
-                    headerList.append(f"T4-PF|{_}+{_+3}")
-                    headerList.append(f"T4-RF|{_}+{_+3}")
-                    headerList.append(f"T4-NG|{_}+{_+3}")
-
-                headerList.append(f"T4-I|S")
-                headerList.append(f"T4-PF|S")
-                headerList.append(f"T4-RF|S")
-                headerList.append(f"T4-NG|S")
-
-                headerList.append(f"T4-I|M")
-                headerList.append(f"T4-PF|M")
-                headerList.append(f"T4-RF|M")
-                headerList.append(f"T4-NG|M")
-
-                headerList.append(f"T4-I|VAR")
-                headerList.append(f"T4-PF|VAR")
-                headerList.append(f"T4-RF|VAR")
-                headerList.append(f"T4-NG|VAR")
-
-                headerList.append(f"T4-I|SD")
-                headerList.append(f"T4-PF|SD")
-                headerList.append(f"T4-RF|SD")
-                headerList.append(f"T4-NG|SD")
-
-                for _ in range(5-4):
-                    headerList.append(f"T5-I|{_}+{_+4}")
-                    headerList.append(f"T5-PF|{_}+{_+4}")
-                    headerList.append(f"T5-RF|{_}+{_+4}")
-                    headerList.append(f"T5-NG|{_}+{_+4}")
+                CYCLE = 0
+                NGRAPH_COUNT = 0
                 
                 # open CSV file and assign header
                 with open(csv_path_original, 'w', newline='') as file:
@@ -921,11 +509,12 @@ def main():
             captcha = []    
 
             export_dir_path = prelude(name)
-            
+            CHAR_COUNT = 5
+
             '''
             create merge_df csv file
             '''
-            merge_csv_name = "df_IUDU_" + name + ".csv"
+            merge_csv_name = "df_IRDR_" + name + ".csv"
             merge_csv_path = os.path.join(export_dir_path, merge_csv_name)
 
             if os.path.isfile(merge_csv_path) is True:
@@ -941,10 +530,10 @@ def main():
 
                 print(f"Merge_DF CSV file will be created: {merge_csv_path}")
 
-            csv_name_original = "original_IUDU_" + name + ".csv"
+            csv_name_original = "original_IRDR_" + name + ".csv"
             csv_path_original = os.path.join(export_dir_path, csv_name_original)
 
-            csv_name_single = "single_IUDU_" + name + ".csv"
+            csv_name_single = "single_IRDR_" + name + ".csv"
             csv_path_single = os.path.join(export_dir_path, csv_name_single)
 
             if os.path.isfile(csv_path_original) is True:
@@ -952,94 +541,39 @@ def main():
             else:
                 # assign header columns
                 headerList = ['Subject', 'Sequence']
-                headerList.append(f"T2-D|0")
-                for _ in range(5-1):
-                    headerList.append(f"T2-I|{_}+{_+1}")
-                    headerList.append(f"T2-PF|{_}+{_+1}")
-                    headerList.append(f"T2-RF|{_}+{_+1}")
-                    headerList.append(f"T2-NG|{_}+{_+1}")
-                    headerList.append(f"T2-D|{_+1}")
-                headerList.append(f"T2-D|S")
-                headerList.append(f"T2-I|S")
-                headerList.append(f"T2-PF|S")
-                headerList.append(f"T2-RF|S")
-                headerList.append(f"T2-NG|S")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = CYCLE + 1
 
-                headerList.append(f"T2-D|M")
-                headerList.append(f"T2-I|M")
-                headerList.append(f"T2-PF|M")
-                headerList.append(f"T2-RF|M")
-                headerList.append(f"T2-DT-M")
+                headerList.append(f"T{NGRAPH_COUNT}-D|0")
+                
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    headerList.append(f"T{NGRAPH_COUNT}-D|{position+CYCLE}")
 
-                headerList.append(f"T2-D|VAR")
-                headerList.append(f"T2-I|VAR")
-                headerList.append(f"T2-PF|VAR")
-                headerList.append(f"T2-RF|VAR")
-                headerList.append(f"T2-DT-VAR")
+                for stat in range(len(STAT_FEATURES)):
+                    for full in range(len(FULL_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{FULL_FEATURES[full]}|{STAT_FEATURES[stat]}")
 
-                headerList.append(f"T2-D|SD")
-                headerList.append(f"T2-I|SD")
-                headerList.append(f"T2-PF|SD")
-                headerList.append(f"T2-RF|SD")
-                headerList.append(f"T2-NG|SD")
+                for _ in range(CHAR_COUNT-MIDDLE_NGRAPH):
+                    CYCLE = CYCLE + 1
+                    NGRAPH_COUNT = NGRAPH_COUNT + 1
+                    for position in range(CHAR_COUNT-CYCLE):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    for stat in range(len(STAT_FEATURES)):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{STAT_FEATURES[stat]}")
 
-                for _ in range(5-2):
-                    headerList.append(f"T3-I|{_}+{_+2}")
-                    headerList.append(f"T3-PF|{_}+{_+2}")
-                    headerList.append(f"T3-RF|{_}+{_+2}")
-                    headerList.append(f"T3-NG|{_}+{_+2}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = NGRAPH_COUNT + 1
 
-                headerList.append(f"T3-I|S")
-                headerList.append(f"T3-PF|S")
-                headerList.append(f"T3-RF|S")
-                headerList.append(f"T3-NG|S")
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
 
-                headerList.append(f"T3-I|M")
-                headerList.append(f"T3-PF|M")
-                headerList.append(f"T3-RF|M")
-                headerList.append(f"T3-NG|M")
-
-                headerList.append(f"T3-I|VAR")
-                headerList.append(f"T3-PF|VAR")
-                headerList.append(f"T3-RF|VAR")
-                headerList.append(f"T3-NG|VAR")
-
-                headerList.append(f"T3-I|SD")
-                headerList.append(f"T3-PF|SD")
-                headerList.append(f"T3-RF|SD")
-                headerList.append(f"T3-NG|SD")
-
-                for _ in range(5-3):
-                    headerList.append(f"T4-I|{_}+{_+3}")
-                    headerList.append(f"T4-PF|{_}+{_+3}")
-                    headerList.append(f"T4-RF|{_}+{_+3}")
-                    headerList.append(f"T4-NG|{_}+{_+3}")
-
-                headerList.append(f"T4-I|S")
-                headerList.append(f"T4-PF|S")
-                headerList.append(f"T4-RF|S")
-                headerList.append(f"T4-NG|S")
-
-                headerList.append(f"T4-I|M")
-                headerList.append(f"T4-PF|M")
-                headerList.append(f"T4-RF|M")
-                headerList.append(f"T4-NG|M")
-
-                headerList.append(f"T4-I|VAR")
-                headerList.append(f"T4-PF|VAR")
-                headerList.append(f"T4-RF|VAR")
-                headerList.append(f"T4-NG|VAR")
-
-                headerList.append(f"T4-I|SD")
-                headerList.append(f"T4-PF|SD")
-                headerList.append(f"T4-RF|SD")
-                headerList.append(f"T4-NG|SD")
-
-                for _ in range(5-4):
-                    headerList.append(f"T5-I|{_}+{_+4}")
-                    headerList.append(f"T5-PF|{_}+{_+4}")
-                    headerList.append(f"T5-RF|{_}+{_+4}")
-                    headerList.append(f"T5-NG|{_}+{_+4}")
+                CYCLE = 0
+                NGRAPH_COUNT = 0
                 
                 # open CSV file and assign header
                 with open(csv_path_original, 'w', newline='') as file:
@@ -1134,8 +668,8 @@ def main():
             count = 1
 
             export_dir_path = prelude(name)
-            maxPwdLen = len(password)
-            
+            CHAR_COUNT = len(password)
+
             '''
             create merge_df csv file
             '''
@@ -1172,170 +706,39 @@ def main():
             else:
                 # assign header columns
                 headerList = ['Subject', 'Password']
-                headerList.append(f"T2-D|0")
-                for _ in range(maxPwdLen-1):
-                    headerList.append(f"T2-I|{_}+{_+1}")
-                    headerList.append(f"T2-PF|{_}+{_+1}")
-                    headerList.append(f"T2-RF|{_}+{_+1}")
-                    headerList.append(f"T2-NG|{_}+{_+1}")
-                    headerList.append(f"T2-D|{_+1}")
-                headerList.append(f"T2-D|S")
-                headerList.append(f"T2-I|S")
-                headerList.append(f"T2-PF|S")
-                headerList.append(f"T2-RF|S")
-                headerList.append(f"T2-NG|S")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = CYCLE + 1
 
-                headerList.append(f"T2-D|M")
-                headerList.append(f"T2-I|M")
-                headerList.append(f"T2-PF|M")
-                headerList.append(f"T2-RF|M")
-                headerList.append(f"T2-DT-M")
+                headerList.append(f"T{NGRAPH_COUNT}-D|0")
+                
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    headerList.append(f"T{NGRAPH_COUNT}-D|{position+CYCLE}")
 
-                headerList.append(f"T2-D|VAR")
-                headerList.append(f"T2-I|VAR")
-                headerList.append(f"T2-PF|VAR")
-                headerList.append(f"T2-RF|VAR")
-                headerList.append(f"T2-DT-VAR")
+                for stat in range(len(STAT_FEATURES)):
+                    for full in range(len(FULL_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{FULL_FEATURES[full]}|{STAT_FEATURES[stat]}")
 
-                headerList.append(f"T2-D|SD")
-                headerList.append(f"T2-I|SD")
-                headerList.append(f"T2-PF|SD")
-                headerList.append(f"T2-RF|SD")
-                headerList.append(f"T2-NG|SD")
+                for _ in range(CHAR_COUNT-MIDDLE_NGRAPH):
+                    CYCLE = CYCLE + 1
+                    NGRAPH_COUNT = NGRAPH_COUNT + 1
+                    for position in range(CHAR_COUNT-CYCLE):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    for stat in range(len(STAT_FEATURES)):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{STAT_FEATURES[stat]}")
 
-                for _ in range(maxPwdLen-2):
-                    headerList.append(f"T3-I|{_}+{_+2}")
-                    headerList.append(f"T3-PF|{_}+{_+2}")
-                    headerList.append(f"T3-RF|{_}+{_+2}")
-                    headerList.append(f"T3-NG|{_}+{_+2}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = NGRAPH_COUNT + 1
 
-                headerList.append(f"T3-I|S")
-                headerList.append(f"T3-PF|S")
-                headerList.append(f"T3-RF|S")
-                headerList.append(f"T3-NG|S")
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
 
-                headerList.append(f"T3-I|M")
-                headerList.append(f"T3-PF|M")
-                headerList.append(f"T3-RF|M")
-                headerList.append(f"T3-NG|M")
-
-                headerList.append(f"T3-I|VAR")
-                headerList.append(f"T3-PF|VAR")
-                headerList.append(f"T3-RF|VAR")
-                headerList.append(f"T3-NG|VAR")
-
-                headerList.append(f"T3-I|SD")
-                headerList.append(f"T3-PF|SD")
-                headerList.append(f"T3-RF|SD")
-                headerList.append(f"T3-NG|SD")
-
-                for _ in range(maxPwdLen-3):
-                    headerList.append(f"T4-I|{_}+{_+3}")
-                    headerList.append(f"T4-PF|{_}+{_+3}")
-                    headerList.append(f"T4-RF|{_}+{_+3}")
-                    headerList.append(f"T4-NG|{_}+{_+3}")
-
-                headerList.append(f"T4-I|S")
-                headerList.append(f"T4-PF|S")
-                headerList.append(f"T4-RF|S")
-                headerList.append(f"T4-NG|S")
-
-                headerList.append(f"T4-I|M")
-                headerList.append(f"T4-PF|M")
-                headerList.append(f"T4-RF|M")
-                headerList.append(f"T4-NG|M")
-
-                headerList.append(f"T4-I|VAR")
-                headerList.append(f"T4-PF|VAR")
-                headerList.append(f"T4-RF|VAR")
-                headerList.append(f"T4-NG|VAR")
-
-                headerList.append(f"T4-I|SD")
-                headerList.append(f"T4-PF|SD")
-                headerList.append(f"T4-RF|SD")
-                headerList.append(f"T4-NG|SD")
-
-                for _ in range(maxPwdLen-4):
-                    headerList.append(f"T5-I|{_}+{_+4}")
-                    headerList.append(f"T5-PF|{_}+{_+4}")
-                    headerList.append(f"T5-RF|{_}+{_+4}")
-                    headerList.append(f"T5-NG|{_}+{_+4}")
-                headerList.append(f"T5-I|S")
-                headerList.append(f"T5-PF|S")
-                headerList.append(f"T5-RF|S")
-                headerList.append(f"T5-NG|S")
-
-                headerList.append(f"T5-I|M")
-                headerList.append(f"T5-PF|M")
-                headerList.append(f"T5-RF|M")
-                headerList.append(f"T5-NG|M")
-
-                headerList.append(f"T5-I|VAR")
-                headerList.append(f"T5-PF|VAR")
-                headerList.append(f"T5-RF|VAR")
-                headerList.append(f"T5-NG|VAR")
-
-                headerList.append(f"T5-I|SD")
-                headerList.append(f"T5-PF|SD")
-                headerList.append(f"T5-RF|SD")
-                headerList.append(f"T5-NG|SD")
-
-                for _ in range(maxPwdLen-5):
-                    headerList.append(f"T6-I|{_}+{_+5}")
-                    headerList.append(f"T6-PF|{_}+{_+5}")
-                    headerList.append(f"T6-RF|{_}+{_+5}")
-                    headerList.append(f"T6-NG|{_}+{_+5}")
-                headerList.append(f"T6-I|S")
-                headerList.append(f"T6-PF|S")
-                headerList.append(f"T6-RF|S")
-                headerList.append(f"T6-NG|S")
-
-                headerList.append(f"T6-I|M")
-                headerList.append(f"T6-PF|M")
-                headerList.append(f"T6-RF|M")
-                headerList.append(f"T6-NG|M")
-
-                headerList.append(f"T6-I|VAR")
-                headerList.append(f"T6-PF|VAR")
-                headerList.append(f"T6-RF|VAR")
-                headerList.append(f"T6-NG|VAR")
-
-                headerList.append(f"T6-I|SD")
-                headerList.append(f"T6-PF|SD")
-                headerList.append(f"T6-RF|SD")
-                headerList.append(f"T6-NG|SD")
-
-                for _ in range(maxPwdLen-6):
-                    headerList.append(f"T7-I|{_}+{_+6}")
-                    headerList.append(f"T7-PF|{_}+{_+6}")
-                    headerList.append(f"T7-RF|{_}+{_+6}")
-                    headerList.append(f"T7-NG|{_}+{_+6}")
-
-                headerList.append(f"T7-I|S")
-                headerList.append(f"T7-PF|S")
-                headerList.append(f"T7-RF|S")
-                headerList.append(f"T7-NG|S")
-
-                headerList.append(f"T7-I|M")
-                headerList.append(f"T7-PF|M")
-                headerList.append(f"T7-RF|M")
-                headerList.append(f"T7-NG|M")
-
-                headerList.append(f"T7-I|VAR")
-                headerList.append(f"T7-PF|VAR")
-                headerList.append(f"T7-RF|VAR")
-                headerList.append(f"T7-NG|VAR")
-
-                headerList.append(f"T7-I|SD")
-                headerList.append(f"T7-PF|SD")
-                headerList.append(f"T7-RF|SD")
-                headerList.append(f"T7-NG|SD")
-
-                for _ in range(maxPwdLen-7):
-                    headerList.append(f"T8-I|{_}+{_+7}")
-                    headerList.append(f"T8-PF|{_}+{_+7}")
-                    headerList.append(f"T8-RF|{_}+{_+7}")
-                    headerList.append(f"T8-NG|{_}+{_+7}")
+                CYCLE = 0
+                NGRAPH_COUNT = 0
                 
                 # open CSV file and assign header
                 with open(csv_path_full, 'w', newline='') as file:
@@ -1351,49 +754,31 @@ def main():
             else:
                 # assign header columns
                 headerList = ['Subject', 'Password']
-                headerList.append(f"T2-D|0")
-                for _ in range(maxPwdLen-1):
-                    headerList.append(f"T2-I|{_}+{_+1}")
-                    headerList.append(f"T2-PF|{_}+{_+1}")
-                    headerList.append(f"T2-RF|{_}+{_+1}")
-                    headerList.append(f"T2-NG|{_}+{_+1}")
-                    headerList.append(f"T2-D|{_+1}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = CYCLE + 1
 
-                for _ in range(maxPwdLen-2):
-                    headerList.append(f"T3-I|{_}+{_+2}")
-                    headerList.append(f"T3-PF|{_}+{_+2}")
-                    headerList.append(f"T3-RF|{_}+{_+2}")
-                    headerList.append(f"T3-NG|{_}+{_+2}")
+                headerList.append(f"T{NGRAPH_COUNT}-D|0")
+                
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    headerList.append(f"T{NGRAPH_COUNT}-D|{position+CYCLE}")
 
-                for _ in range(maxPwdLen-3):
-                    headerList.append(f"T4-I|{_}+{_+3}")
-                    headerList.append(f"T4-PF|{_}+{_+3}")
-                    headerList.append(f"T4-RF|{_}+{_+3}")
-                    headerList.append(f"T4-NG|{_}+{_+3}")
+                for _ in range(CHAR_COUNT-MIDDLE_NGRAPH):
+                    CYCLE = CYCLE + 1
+                    NGRAPH_COUNT = NGRAPH_COUNT + 1
+                    for position in range(CHAR_COUNT-CYCLE):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = NGRAPH_COUNT + 1
 
-                for _ in range(maxPwdLen-4):
-                    headerList.append(f"T5-I|{_}+{_+4}")
-                    headerList.append(f"T5-PF|{_}+{_+4}")
-                    headerList.append(f"T5-RF|{_}+{_+4}")
-                    headerList.append(f"T5-NG|{_}+{_+4}")
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
 
-                for _ in range(maxPwdLen-5):
-                    headerList.append(f"T6-I|{_}+{_+5}")
-                    headerList.append(f"T6-PF|{_}+{_+5}")
-                    headerList.append(f"T6-RF|{_}+{_+5}")
-                    headerList.append(f"T6-NG|{_}+{_+5}")
-
-                for _ in range(maxPwdLen-6):
-                    headerList.append(f"T7-I|{_}+{_+6}")
-                    headerList.append(f"T7-PF|{_}+{_+6}")
-                    headerList.append(f"T7-RF|{_}+{_+6}")
-                    headerList.append(f"T7-NG|{_}+{_+6}")
-
-                for _ in range(maxPwdLen-7):
-                    headerList.append(f"T8-I|{_}+{_+7}")
-                    headerList.append(f"T8-PF|{_}+{_+7}")
-                    headerList.append(f"T8-RF|{_}+{_+7}")
-                    headerList.append(f"T8-NG|{_}+{_+7}")
+                CYCLE = 0
+                NGRAPH_COUNT = 0
                 
                 # open CSV file and assign header
                 with open(csv_path_nostat, 'w', newline='') as file:
@@ -1409,13 +794,15 @@ def main():
             else:
                 # assign header columns
                 headerList = ['Subject', 'Password']
-                headerList.append(f"T2-D|0")
-                for _ in range(maxPwdLen-1):
-                    headerList.append(f"T2-I|{_}+{_+1}")
-                    headerList.append(f"T2-PF|{_}+{_+1}")
-                    headerList.append(f"T2-RF|{_}+{_+1}")
-                    headerList.append(f"T2-NG|{_}+{_+1}")
-                    headerList.append(f"T2-D|{_+1}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = CYCLE + 1
+
+                headerList.append(f"T{NGRAPH_COUNT}-D|0")
+                
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    headerList.append(f"T{NGRAPH_COUNT}-D|{position+CYCLE}")
                 
                 # open CSV file and assign header
                 with open(csv_path_bare, 'w', newline='') as file:
@@ -1514,7 +901,7 @@ def main():
             count = 1
 
             export_dir_path = prelude(name)
-            maxPwdLen = len(password)
+            CHAR_COUNT = len(password)
             
             '''
             create merge_df csv file
@@ -1552,170 +939,39 @@ def main():
             else:
                 # assign header columns
                 headerList = ['Subject', 'Password']
-                headerList.append(f"T2-D|0")
-                for _ in range(maxPwdLen-1):
-                    headerList.append(f"T2-I|{_}+{_+1}")
-                    headerList.append(f"T2-PF|{_}+{_+1}")
-                    headerList.append(f"T2-RF|{_}+{_+1}")
-                    headerList.append(f"T2-NG|{_}+{_+1}")
-                    headerList.append(f"T2-D|{_+1}")
-                headerList.append(f"T2-D|S")
-                headerList.append(f"T2-I|S")
-                headerList.append(f"T2-PF|S")
-                headerList.append(f"T2-RF|S")
-                headerList.append(f"T2-NG|S")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = CYCLE + 1
 
-                headerList.append(f"T2-D|M")
-                headerList.append(f"T2-I|M")
-                headerList.append(f"T2-PF|M")
-                headerList.append(f"T2-RF|M")
-                headerList.append(f"T2-DT-M")
+                headerList.append(f"T{NGRAPH_COUNT}-D|0")
+                
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    headerList.append(f"T{NGRAPH_COUNT}-D|{position+CYCLE}")
 
-                headerList.append(f"T2-D|VAR")
-                headerList.append(f"T2-I|VAR")
-                headerList.append(f"T2-PF|VAR")
-                headerList.append(f"T2-RF|VAR")
-                headerList.append(f"T2-DT-VAR")
+                for stat in range(len(STAT_FEATURES)):
+                    for full in range(len(FULL_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{FULL_FEATURES[full]}|{STAT_FEATURES[stat]}")
 
-                headerList.append(f"T2-D|SD")
-                headerList.append(f"T2-I|SD")
-                headerList.append(f"T2-PF|SD")
-                headerList.append(f"T2-RF|SD")
-                headerList.append(f"T2-NG|SD")
+                for _ in range(CHAR_COUNT-MIDDLE_NGRAPH):
+                    CYCLE = CYCLE + 1
+                    NGRAPH_COUNT = NGRAPH_COUNT + 1
+                    for position in range(CHAR_COUNT-CYCLE):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    for stat in range(len(STAT_FEATURES)):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{STAT_FEATURES[stat]}")
 
-                for _ in range(maxPwdLen-2):
-                    headerList.append(f"T3-I|{_}+{_+2}")
-                    headerList.append(f"T3-PF|{_}+{_+2}")
-                    headerList.append(f"T3-RF|{_}+{_+2}")
-                    headerList.append(f"T3-NG|{_}+{_+2}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = NGRAPH_COUNT + 1
 
-                headerList.append(f"T3-I|S")
-                headerList.append(f"T3-PF|S")
-                headerList.append(f"T3-RF|S")
-                headerList.append(f"T3-NG|S")
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
 
-                headerList.append(f"T3-I|M")
-                headerList.append(f"T3-PF|M")
-                headerList.append(f"T3-RF|M")
-                headerList.append(f"T3-NG|M")
-
-                headerList.append(f"T3-I|VAR")
-                headerList.append(f"T3-PF|VAR")
-                headerList.append(f"T3-RF|VAR")
-                headerList.append(f"T3-NG|VAR")
-
-                headerList.append(f"T3-I|SD")
-                headerList.append(f"T3-PF|SD")
-                headerList.append(f"T3-RF|SD")
-                headerList.append(f"T3-NG|SD")
-
-                for _ in range(maxPwdLen-3):
-                    headerList.append(f"T4-I|{_}+{_+3}")
-                    headerList.append(f"T4-PF|{_}+{_+3}")
-                    headerList.append(f"T4-RF|{_}+{_+3}")
-                    headerList.append(f"T4-NG|{_}+{_+3}")
-
-                headerList.append(f"T4-I|S")
-                headerList.append(f"T4-PF|S")
-                headerList.append(f"T4-RF|S")
-                headerList.append(f"T4-NG|S")
-
-                headerList.append(f"T4-I|M")
-                headerList.append(f"T4-PF|M")
-                headerList.append(f"T4-RF|M")
-                headerList.append(f"T4-NG|M")
-
-                headerList.append(f"T4-I|VAR")
-                headerList.append(f"T4-PF|VAR")
-                headerList.append(f"T4-RF|VAR")
-                headerList.append(f"T4-NG|VAR")
-
-                headerList.append(f"T4-I|SD")
-                headerList.append(f"T4-PF|SD")
-                headerList.append(f"T4-RF|SD")
-                headerList.append(f"T4-NG|SD")
-
-                for _ in range(maxPwdLen-4):
-                    headerList.append(f"T5-I|{_}+{_+4}")
-                    headerList.append(f"T5-PF|{_}+{_+4}")
-                    headerList.append(f"T5-RF|{_}+{_+4}")
-                    headerList.append(f"T5-NG|{_}+{_+4}")
-                headerList.append(f"T5-I|S")
-                headerList.append(f"T5-PF|S")
-                headerList.append(f"T5-RF|S")
-                headerList.append(f"T5-NG|S")
-
-                headerList.append(f"T5-I|M")
-                headerList.append(f"T5-PF|M")
-                headerList.append(f"T5-RF|M")
-                headerList.append(f"T5-NG|M")
-
-                headerList.append(f"T5-I|VAR")
-                headerList.append(f"T5-PF|VAR")
-                headerList.append(f"T5-RF|VAR")
-                headerList.append(f"T5-NG|VAR")
-
-                headerList.append(f"T5-I|SD")
-                headerList.append(f"T5-PF|SD")
-                headerList.append(f"T5-RF|SD")
-                headerList.append(f"T5-NG|SD")
-
-                for _ in range(maxPwdLen-5):
-                    headerList.append(f"T6-I|{_}+{_+5}")
-                    headerList.append(f"T6-PF|{_}+{_+5}")
-                    headerList.append(f"T6-RF|{_}+{_+5}")
-                    headerList.append(f"T6-NG|{_}+{_+5}")
-                headerList.append(f"T6-I|S")
-                headerList.append(f"T6-PF|S")
-                headerList.append(f"T6-RF|S")
-                headerList.append(f"T6-NG|S")
-
-                headerList.append(f"T6-I|M")
-                headerList.append(f"T6-PF|M")
-                headerList.append(f"T6-RF|M")
-                headerList.append(f"T6-NG|M")
-
-                headerList.append(f"T6-I|VAR")
-                headerList.append(f"T6-PF|VAR")
-                headerList.append(f"T6-RF|VAR")
-                headerList.append(f"T6-NG|VAR")
-
-                headerList.append(f"T6-I|SD")
-                headerList.append(f"T6-PF|SD")
-                headerList.append(f"T6-RF|SD")
-                headerList.append(f"T6-NG|SD")
-
-                for _ in range(maxPwdLen-6):
-                    headerList.append(f"T7-I|{_}+{_+6}")
-                    headerList.append(f"T7-PF|{_}+{_+6}")
-                    headerList.append(f"T7-RF|{_}+{_+6}")
-                    headerList.append(f"T7-NG|{_}+{_+6}")
-
-                headerList.append(f"T7-I|S")
-                headerList.append(f"T7-PF|S")
-                headerList.append(f"T7-RF|S")
-                headerList.append(f"T7-NG|S")
-
-                headerList.append(f"T7-I|M")
-                headerList.append(f"T7-PF|M")
-                headerList.append(f"T7-RF|M")
-                headerList.append(f"T7-NG|M")
-
-                headerList.append(f"T7-I|VAR")
-                headerList.append(f"T7-PF|VAR")
-                headerList.append(f"T7-RF|VAR")
-                headerList.append(f"T7-NG|VAR")
-
-                headerList.append(f"T7-I|SD")
-                headerList.append(f"T7-PF|SD")
-                headerList.append(f"T7-RF|SD")
-                headerList.append(f"T7-NG|SD")
-
-                for _ in range(maxPwdLen-7):
-                    headerList.append(f"T8-I|{_}+{_+7}")
-                    headerList.append(f"T8-PF|{_}+{_+7}")
-                    headerList.append(f"T8-RF|{_}+{_+7}")
-                    headerList.append(f"T8-NG|{_}+{_+7}")
+                CYCLE = 0
+                NGRAPH_COUNT = 0
                 
                 # open CSV file and assign header
                 with open(csv_path_full, 'w', newline='') as file:
@@ -1731,49 +987,31 @@ def main():
             else:
                 # assign header columns
                 headerList = ['Subject', 'Password']
-                headerList.append(f"T2-D|0")
-                for _ in range(maxPwdLen-1):
-                    headerList.append(f"T2-I|{_}+{_+1}")
-                    headerList.append(f"T2-PF|{_}+{_+1}")
-                    headerList.append(f"T2-RF|{_}+{_+1}")
-                    headerList.append(f"T2-NG|{_}+{_+1}")
-                    headerList.append(f"T2-D|{_+1}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = CYCLE + 1
 
-                for _ in range(maxPwdLen-2):
-                    headerList.append(f"T3-I|{_}+{_+2}")
-                    headerList.append(f"T3-PF|{_}+{_+2}")
-                    headerList.append(f"T3-RF|{_}+{_+2}")
-                    headerList.append(f"T3-NG|{_}+{_+2}")
+                headerList.append(f"T{NGRAPH_COUNT}-D|0")
+                
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    headerList.append(f"T{NGRAPH_COUNT}-D|{position+CYCLE}")
 
-                for _ in range(maxPwdLen-3):
-                    headerList.append(f"T4-I|{_}+{_+3}")
-                    headerList.append(f"T4-PF|{_}+{_+3}")
-                    headerList.append(f"T4-RF|{_}+{_+3}")
-                    headerList.append(f"T4-NG|{_}+{_+3}")
+                for _ in range(CHAR_COUNT-MIDDLE_NGRAPH):
+                    CYCLE = CYCLE + 1
+                    NGRAPH_COUNT = NGRAPH_COUNT + 1
+                    for position in range(CHAR_COUNT-CYCLE):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = NGRAPH_COUNT + 1
 
-                for _ in range(maxPwdLen-4):
-                    headerList.append(f"T5-I|{_}+{_+4}")
-                    headerList.append(f"T5-PF|{_}+{_+4}")
-                    headerList.append(f"T5-RF|{_}+{_+4}")
-                    headerList.append(f"T5-NG|{_}+{_+4}")
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
 
-                for _ in range(maxPwdLen-5):
-                    headerList.append(f"T6-I|{_}+{_+5}")
-                    headerList.append(f"T6-PF|{_}+{_+5}")
-                    headerList.append(f"T6-RF|{_}+{_+5}")
-                    headerList.append(f"T6-NG|{_}+{_+5}")
-
-                for _ in range(maxPwdLen-6):
-                    headerList.append(f"T7-I|{_}+{_+6}")
-                    headerList.append(f"T7-PF|{_}+{_+6}")
-                    headerList.append(f"T7-RF|{_}+{_+6}")
-                    headerList.append(f"T7-NG|{_}+{_+6}")
-
-                for _ in range(maxPwdLen-7):
-                    headerList.append(f"T8-I|{_}+{_+7}")
-                    headerList.append(f"T8-PF|{_}+{_+7}")
-                    headerList.append(f"T8-RF|{_}+{_+7}")
-                    headerList.append(f"T8-NG|{_}+{_+7}")
+                CYCLE = 0
+                NGRAPH_COUNT = 0
                 
                 # open CSV file and assign header
                 with open(csv_path_nostat, 'w', newline='') as file:
@@ -1789,13 +1027,15 @@ def main():
             else:
                 # assign header columns
                 headerList = ['Subject', 'Password']
-                headerList.append(f"T2-D|0")
-                for _ in range(maxPwdLen-1):
-                    headerList.append(f"T2-I|{_}+{_+1}")
-                    headerList.append(f"T2-PF|{_}+{_+1}")
-                    headerList.append(f"T2-RF|{_}+{_+1}")
-                    headerList.append(f"T2-NG|{_}+{_+1}")
-                    headerList.append(f"T2-D|{_+1}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = CYCLE + 1
+
+                headerList.append(f"T{NGRAPH_COUNT}-D|0")
+                
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    headerList.append(f"T{NGRAPH_COUNT}-D|{position+CYCLE}")
                 
                 # open CSV file and assign header
                 with open(csv_path_bare, 'w', newline='') as file:
@@ -1893,7 +1133,7 @@ def main():
             count = 1
 
             export_dir_path = prelude(name)
-            maxPwdLen = 8
+            CHAR_COUNT = 8
             '''
             create merge_df csv file
             '''
@@ -1930,170 +1170,39 @@ def main():
             else:
                 # assign header columns
                 headerList = ['Subject', 'Password']
-                headerList.append(f"T2-D|0")
-                for _ in range(maxPwdLen-1):
-                    headerList.append(f"T2-I|{_}+{_+1}")
-                    headerList.append(f"T2-PF|{_}+{_+1}")
-                    headerList.append(f"T2-RF|{_}+{_+1}")
-                    headerList.append(f"T2-NG|{_}+{_+1}")
-                    headerList.append(f"T2-D|{_+1}")
-                headerList.append(f"T2-D|S")
-                headerList.append(f"T2-I|S")
-                headerList.append(f"T2-PF|S")
-                headerList.append(f"T2-RF|S")
-                headerList.append(f"T2-NG|S")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = CYCLE + 1
 
-                headerList.append(f"T2-D|M")
-                headerList.append(f"T2-I|M")
-                headerList.append(f"T2-PF|M")
-                headerList.append(f"T2-RF|M")
-                headerList.append(f"T2-DT-M")
+                headerList.append(f"T{NGRAPH_COUNT}-D|0")
+                
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    headerList.append(f"T{NGRAPH_COUNT}-D|{position+CYCLE}")
 
-                headerList.append(f"T2-D|VAR")
-                headerList.append(f"T2-I|VAR")
-                headerList.append(f"T2-PF|VAR")
-                headerList.append(f"T2-RF|VAR")
-                headerList.append(f"T2-DT-VAR")
+                for stat in range(len(STAT_FEATURES)):
+                    for full in range(len(FULL_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{FULL_FEATURES[full]}|{STAT_FEATURES[stat]}")
 
-                headerList.append(f"T2-D|SD")
-                headerList.append(f"T2-I|SD")
-                headerList.append(f"T2-PF|SD")
-                headerList.append(f"T2-RF|SD")
-                headerList.append(f"T2-NG|SD")
+                for _ in range(CHAR_COUNT-MIDDLE_NGRAPH):
+                    CYCLE = CYCLE + 1
+                    NGRAPH_COUNT = NGRAPH_COUNT + 1
+                    for position in range(CHAR_COUNT-CYCLE):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    for stat in range(len(STAT_FEATURES)):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{STAT_FEATURES[stat]}")
 
-                for _ in range(maxPwdLen-2):
-                    headerList.append(f"T3-I|{_}+{_+2}")
-                    headerList.append(f"T3-PF|{_}+{_+2}")
-                    headerList.append(f"T3-RF|{_}+{_+2}")
-                    headerList.append(f"T3-NG|{_}+{_+2}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = NGRAPH_COUNT + 1
 
-                headerList.append(f"T3-I|S")
-                headerList.append(f"T3-PF|S")
-                headerList.append(f"T3-RF|S")
-                headerList.append(f"T3-NG|S")
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
 
-                headerList.append(f"T3-I|M")
-                headerList.append(f"T3-PF|M")
-                headerList.append(f"T3-RF|M")
-                headerList.append(f"T3-NG|M")
-
-                headerList.append(f"T3-I|VAR")
-                headerList.append(f"T3-PF|VAR")
-                headerList.append(f"T3-RF|VAR")
-                headerList.append(f"T3-NG|VAR")
-
-                headerList.append(f"T3-I|SD")
-                headerList.append(f"T3-PF|SD")
-                headerList.append(f"T3-RF|SD")
-                headerList.append(f"T3-NG|SD")
-
-                for _ in range(maxPwdLen-3):
-                    headerList.append(f"T4-I|{_}+{_+3}")
-                    headerList.append(f"T4-PF|{_}+{_+3}")
-                    headerList.append(f"T4-RF|{_}+{_+3}")
-                    headerList.append(f"T4-NG|{_}+{_+3}")
-
-                headerList.append(f"T4-I|S")
-                headerList.append(f"T4-PF|S")
-                headerList.append(f"T4-RF|S")
-                headerList.append(f"T4-NG|S")
-
-                headerList.append(f"T4-I|M")
-                headerList.append(f"T4-PF|M")
-                headerList.append(f"T4-RF|M")
-                headerList.append(f"T4-NG|M")
-
-                headerList.append(f"T4-I|VAR")
-                headerList.append(f"T4-PF|VAR")
-                headerList.append(f"T4-RF|VAR")
-                headerList.append(f"T4-NG|VAR")
-
-                headerList.append(f"T4-I|SD")
-                headerList.append(f"T4-PF|SD")
-                headerList.append(f"T4-RF|SD")
-                headerList.append(f"T4-NG|SD")
-
-                for _ in range(maxPwdLen-4):
-                    headerList.append(f"T5-I|{_}+{_+4}")
-                    headerList.append(f"T5-PF|{_}+{_+4}")
-                    headerList.append(f"T5-RF|{_}+{_+4}")
-                    headerList.append(f"T5-NG|{_}+{_+4}")
-                headerList.append(f"T5-I|S")
-                headerList.append(f"T5-PF|S")
-                headerList.append(f"T5-RF|S")
-                headerList.append(f"T5-NG|S")
-
-                headerList.append(f"T5-I|M")
-                headerList.append(f"T5-PF|M")
-                headerList.append(f"T5-RF|M")
-                headerList.append(f"T5-NG|M")
-
-                headerList.append(f"T5-I|VAR")
-                headerList.append(f"T5-PF|VAR")
-                headerList.append(f"T5-RF|VAR")
-                headerList.append(f"T5-NG|VAR")
-
-                headerList.append(f"T5-I|SD")
-                headerList.append(f"T5-PF|SD")
-                headerList.append(f"T5-RF|SD")
-                headerList.append(f"T5-NG|SD")
-
-                for _ in range(maxPwdLen-5):
-                    headerList.append(f"T6-I|{_}+{_+5}")
-                    headerList.append(f"T6-PF|{_}+{_+5}")
-                    headerList.append(f"T6-RF|{_}+{_+5}")
-                    headerList.append(f"T6-NG|{_}+{_+5}")
-                headerList.append(f"T6-I|S")
-                headerList.append(f"T6-PF|S")
-                headerList.append(f"T6-RF|S")
-                headerList.append(f"T6-NG|S")
-
-                headerList.append(f"T6-I|M")
-                headerList.append(f"T6-PF|M")
-                headerList.append(f"T6-RF|M")
-                headerList.append(f"T6-NG|M")
-
-                headerList.append(f"T6-I|VAR")
-                headerList.append(f"T6-PF|VAR")
-                headerList.append(f"T6-RF|VAR")
-                headerList.append(f"T6-NG|VAR")
-
-                headerList.append(f"T6-I|SD")
-                headerList.append(f"T6-PF|SD")
-                headerList.append(f"T6-RF|SD")
-                headerList.append(f"T6-NG|SD")
-
-                for _ in range(maxPwdLen-6):
-                    headerList.append(f"T7-I|{_}+{_+6}")
-                    headerList.append(f"T7-PF|{_}+{_+6}")
-                    headerList.append(f"T7-RF|{_}+{_+6}")
-                    headerList.append(f"T7-NG|{_}+{_+6}")
-
-                headerList.append(f"T7-I|S")
-                headerList.append(f"T7-PF|S")
-                headerList.append(f"T7-RF|S")
-                headerList.append(f"T7-NG|S")
-
-                headerList.append(f"T7-I|M")
-                headerList.append(f"T7-PF|M")
-                headerList.append(f"T7-RF|M")
-                headerList.append(f"T7-NG|M")
-
-                headerList.append(f"T7-I|VAR")
-                headerList.append(f"T7-PF|VAR")
-                headerList.append(f"T7-RF|VAR")
-                headerList.append(f"T7-NG|VAR")
-
-                headerList.append(f"T7-I|SD")
-                headerList.append(f"T7-PF|SD")
-                headerList.append(f"T7-RF|SD")
-                headerList.append(f"T7-NG|SD")
-
-                for _ in range(maxPwdLen-7):
-                    headerList.append(f"T8-I|{_}+{_+7}")
-                    headerList.append(f"T8-PF|{_}+{_+7}")
-                    headerList.append(f"T8-RF|{_}+{_+7}")
-                    headerList.append(f"T8-NG|{_}+{_+7}")
+                CYCLE = 0
+                NGRAPH_COUNT = 0
                 
                 # open CSV file and assign header
                 with open(csv_path_original, 'w', newline='') as file:
@@ -2109,49 +1218,31 @@ def main():
             else:
                 # assign header columns
                 headerList = ['Subject', 'Password']
-                headerList.append(f"T2-D|0")
-                for _ in range(maxPwdLen-1):
-                    headerList.append(f"T2-I|{_}+{_+1}")
-                    headerList.append(f"T2-PF|{_}+{_+1}")
-                    headerList.append(f"T2-RF|{_}+{_+1}")
-                    headerList.append(f"T2-NG|{_}+{_+1}")
-                    headerList.append(f"T2-D|{_+1}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = CYCLE + 1
 
-                for _ in range(maxPwdLen-2):
-                    headerList.append(f"T3-I|{_}+{_+2}")
-                    headerList.append(f"T3-PF|{_}+{_+2}")
-                    headerList.append(f"T3-RF|{_}+{_+2}")
-                    headerList.append(f"T3-NG|{_}+{_+2}")
+                headerList.append(f"T{NGRAPH_COUNT}-D|0")
+                
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    headerList.append(f"T{NGRAPH_COUNT}-D|{position+CYCLE}")
 
-                for _ in range(maxPwdLen-3):
-                    headerList.append(f"T4-I|{_}+{_+3}")
-                    headerList.append(f"T4-PF|{_}+{_+3}")
-                    headerList.append(f"T4-RF|{_}+{_+3}")
-                    headerList.append(f"T4-NG|{_}+{_+3}")
+                for _ in range(CHAR_COUNT-MIDDLE_NGRAPH):
+                    CYCLE = CYCLE + 1
+                    NGRAPH_COUNT = NGRAPH_COUNT + 1
+                    for position in range(CHAR_COUNT-CYCLE):
+                        for sub in range(len(SUB_FEATURES)):
+                            headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = NGRAPH_COUNT + 1
 
-                for _ in range(maxPwdLen-4):
-                    headerList.append(f"T5-I|{_}+{_+4}")
-                    headerList.append(f"T5-PF|{_}+{_+4}")
-                    headerList.append(f"T5-RF|{_}+{_+4}")
-                    headerList.append(f"T5-NG|{_}+{_+4}")
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
 
-                for _ in range(maxPwdLen-5):
-                    headerList.append(f"T6-I|{_}+{_+5}")
-                    headerList.append(f"T6-PF|{_}+{_+5}")
-                    headerList.append(f"T6-RF|{_}+{_+5}")
-                    headerList.append(f"T6-NG|{_}+{_+5}")
-
-                for _ in range(maxPwdLen-6):
-                    headerList.append(f"T7-I|{_}+{_+6}")
-                    headerList.append(f"T7-PF|{_}+{_+6}")
-                    headerList.append(f"T7-RF|{_}+{_+6}")
-                    headerList.append(f"T7-NG|{_}+{_+6}")
-
-                for _ in range(maxPwdLen-7):
-                    headerList.append(f"T8-I|{_}+{_+7}")
-                    headerList.append(f"T8-PF|{_}+{_+7}")
-                    headerList.append(f"T8-RF|{_}+{_+7}")
-                    headerList.append(f"T8-NG|{_}+{_+7}")
+                CYCLE = 0
+                NGRAPH_COUNT = 0
                 
                 # open CSV file and assign header
                 with open(csv_path_nostat, 'w', newline='') as file:
@@ -2167,13 +1258,15 @@ def main():
             else:
                 # assign header columns
                 headerList = ['Subject', 'Password']
-                headerList.append(f"T2-D|0")
-                for _ in range(maxPwdLen-1):
-                    headerList.append(f"T2-I|{_}+{_+1}")
-                    headerList.append(f"T2-PF|{_}+{_+1}")
-                    headerList.append(f"T2-RF|{_}+{_+1}")
-                    headerList.append(f"T2-NG|{_}+{_+1}")
-                    headerList.append(f"T2-D|{_+1}")
+                CYCLE = CYCLE + 1
+                NGRAPH_COUNT = CYCLE + 1
+
+                headerList.append(f"T{NGRAPH_COUNT}-D|0")
+                
+                for position in range(CHAR_COUNT-CYCLE):
+                    for sub in range(len(SUB_FEATURES)):
+                        headerList.append(f"T{NGRAPH_COUNT}-{SUB_FEATURES[sub]}|{position}+{position+CYCLE}")
+                    headerList.append(f"T{NGRAPH_COUNT}-D|{position+CYCLE}")
                 
                 # open CSV file and assign header
                 with open(csv_path_bare, 'w', newline='') as file:
@@ -2323,8 +1416,6 @@ def prelude(name):
         print(f"Info file will be created: {info_path}")
 
     return export_dir_path
-
-## split up into prelude of info, two different excel/for loop after that [set1/2/3 - set4].
 
 if __name__ == "__main__":
     main()
