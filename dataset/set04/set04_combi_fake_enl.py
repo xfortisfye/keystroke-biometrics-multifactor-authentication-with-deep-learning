@@ -17,7 +17,7 @@ FEATURES_COL = 3
 
 import_csv = pd.read_csv("21_combi/" + "combi_fake.csv")
 export_csv_name = "pair_combi_fake" + ".csv"
-export_csv_path = os.path.join(os.getcwd(), "25_pair_combi", export_csv_name)
+export_csv_path = os.path.join(os.getcwd(), "22_pair_combi", export_csv_name)
 
 headerList = ['Subject', 'Actual', 'Password']
 for _ in range(2):

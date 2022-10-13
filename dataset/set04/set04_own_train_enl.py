@@ -17,7 +17,7 @@ FEATURES_COL = 2
 
 import_csv = pd.read_csv("01_own/" + "own_train.csv")
 export_csv_name = "pair_train_own" + ".csv"
-export_csv_path = os.path.join(os.getcwd(), "05_pair_own", export_csv_name)
+export_csv_path = os.path.join(os.getcwd(), "02_pair_own", export_csv_name)
 
 headerList = ['Subject', 'Password']
 for _ in range(2):
