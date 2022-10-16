@@ -1,4 +1,0 @@
-Incorrect Count: 5
-Invalid Count: 3
-Total Wrong Count: 8
-Accuracy: 92.92035398230088

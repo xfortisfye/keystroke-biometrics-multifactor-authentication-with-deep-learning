@@ -64,7 +64,7 @@ with open(export_csv_path, 'w', newline='') as file:
 with open(export_csv_path, 'a', newline='') as file:
     writer = csv.writer(file)
 
-    for body in range(0, 60, 5):
+    for body in range(0, 55, 5):
         for first in range(0, 5):
             for second in range(0, 5):
                 if second == first:

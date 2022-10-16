@@ -64,7 +64,7 @@ print(f"\nCSV file will be created: {export_csv_path}")
 with open(export_csv_path, 'a', newline='') as file:
     writer = csv.writer(file)
     
-    for body in range(0, 1200, 100):
+    for body in range(0, 1100, 100):
         for first in range(0, 100):
             for second in range(0, 100):
                 if second == first:

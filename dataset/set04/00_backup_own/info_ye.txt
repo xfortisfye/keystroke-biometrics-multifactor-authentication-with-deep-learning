@@ -1,4 +1,0 @@
-Name: Lee Yun En
-OS: nt
-Platform system: Windows
-Platform release: 10
