@@ -1,3 +1,0 @@
-own: own password. all 8 letters.
-same: everyone same password.
-combi: own password + type other ppl password.
