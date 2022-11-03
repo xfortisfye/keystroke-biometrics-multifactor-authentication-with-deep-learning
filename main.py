@@ -1305,7 +1305,7 @@ def main():
             incorrectCount = 0
 
             # andy, azfar, bryce, chris, cy, gerald, ken, qk, sz, vale, ye, ys
-            password_list = ["C05mical", "play4pay", "4cHkh1dL", "a1rcr2ft", "wang1234", "Andy1234", "Kennth12", "Andyb1tc", "andy1234", "memories", "HiAndy12", "tw1nkle6"]
+            password_list = ["Co5mical", "play4pay", "4cHkh1dL", "a1rcr2ft", "wang1234", "Andy1234", "Kennth12", "Andyb1tc", "andy1234", "memories", "HiAndy12", "tw1nkle6"]
 
             for password in password_list:
                 for x in range(0, 1):
