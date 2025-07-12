@@ -25,13 +25,13 @@ def main():
 
     while startFlag is True:
         print("What kind of dataset will you like to generate? \n"
-        + "1) Exp 1: Random 10-Letters Dataset for CAPTCHA\n"
-        + "2) Exp 2: Identical 10-Letters Dataset for CAPTCHA\n"
-        + "3) Exp 3: Controlled dataset for Password\n"
-        + "4) Exp 3: Controlled dataset for Password\n"
-        + "5) Exp 4: \n"
-        + "6) Exp 4: \n"
-        + "7) Exp 4: ")
+        + "1) Exp 1: Random 10-Characters Dataset for CAPTCHA\n"
+        + "2) Exp 2: Identical 10-Characters Dataset for CAPTCHA\n"
+        + "3) Exp 3: Five-Letters Password Dataset (Random)\n"
+        + "4) Exp 3: Five-Letters Password Dataset (Identical)\n"
+        + "5) Exp 4: Eight-Letters Password Dataset (Same password: dEcisi0n)"
+        + "6) Exp 4: Five-Letters Password Dataset (Own password)"
+        + "7) Exp 4: Five-Letters Password Dataset (Combined)
         case = int(input())
         
         if case == 1:
