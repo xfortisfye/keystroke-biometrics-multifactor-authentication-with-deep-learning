@@ -31,7 +31,7 @@ def main():
         + "4) Exp 3: Five-Letters Password Dataset (Identical)\n"
         + "5) Exp 4: Eight-Letters Password Dataset (Same password: dEcisi0n)"
         + "6) Exp 4: Five-Letters Password Dataset (Own password)"
-        + "7) Exp 4: Five-Letters Password Dataset (Combined)
+        + "7) Exp 4: Five-Letters Password Dataset (Combined)")
         case = int(input())
         
         if case == 1:
